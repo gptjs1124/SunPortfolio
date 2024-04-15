@@ -126,10 +126,18 @@ body{margin:0;}
 .commentTextModify{width:calc(100% - 86px); margin-top:10px;}
 .commentTextModify input{width:100%;}
 
+/* admin < contact < search */
+.admin_tit_s1 #search {width:100%; font-size:1.4rem; float:right; margin-bottom:50px;}
+.admin_tit_s1 #search th{color:#fff; width:200px; font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:4px 0; vertical-align: middle;}
+.admin_tit_s1 #search td{text-align:left; color:rgba(255, 255, 255, 0.3); font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:4px 0; vertical-align: middle;}
+.admin_tit_s1 #search a{color:rgba(255, 255, 255, 0.3);}
+.admin_tit_s1 #search #selTel{width:20%; background:#333; color:#fff; border:none; padding: 10px; border-radius:5px;}
+.admin_tit_s1 #search #category{width:50%; background:#333; color:#fff; border:none; padding: 10px; border-radius:5px;}
+.admin_tit_s1 #search select option{border:none;}
+.admin_tit_s1 #search textarea{text-align:left;}
+.admin_tit_s1 #search {width:100%;}
 
-
-
-
+.tab_title{font-size: 4rem; font-weight: 700;  position: relative;  display: inline-block; padding-right: 44px; padding-bottom: 16px;}
 
 
 
