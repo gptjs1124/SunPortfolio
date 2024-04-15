@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pt">
+	<!-- 카테고리 1DEPTH 가져오기 -->
+	<select id="pt_ctgSelect_DEPTH1"
+		resultType="sun.spring.dto.PTCategoryDTO">
+		select 
+			CTG_NO as ctg_no
+			,CTG_NM as ctg_nm
+			,UP_CTG_NO as up_ctg_no
+			,DISP_YN as disp_yn
+			,SEQ as seq
+		from PT_CTG 
+		WHERE UP_CTG_NO = 'M' AND DISP_YN = 'Y'
+		ORDER BY SEQ
+	</select>
+
+	<!-- 카테고리 2DEPTH & 3DEPTH 가져오기 -->
+	<select id="pt_ctgSelect_DEPTH2"
+		resultType="sun.spring.dto.PTCategoryDTO">
+		select * from PT_CTG WHERE UP_CTG_NO = #{up_ctg_no} AND
+		DISP_YN = 'Y' ORDER BY SEQ
+	</select>
+</mapper>

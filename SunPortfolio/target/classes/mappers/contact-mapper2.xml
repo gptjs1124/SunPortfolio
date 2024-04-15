@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="contact">
+	<insert id="insert">
+		insert into sunportfolio values(sunportfolio_seq.nextval, #{title}, #{content}, sysdate)
+	</insert>
+	
+	<select id="select" resultType="sun.spring.dto.ContactDTO">
+		select * from sunportfolio order by seq desc
+	</select>
+	
+	<select id="allBoardCount" resultType="int">
+		<!-- 게시물 총 갯수 -->
+		select count(*) from sunportfolio order by seq
+	</select>
+	
+	<select id="boardCount10" parameterType="hashMap" resultType="sun.spring.dto.ContactDTO">
+		<!-- 한페이지당 10개씩 게시물 보이기 
+			1. 페이지가 1번일 때 제일 최근에 올라간 순서 대로 게시글 10개가 보여야한다.
+			2. 총 게시글이 만일 25개면 10개씩 잘라서 페이지가 3페이지 나와야 한다.
+		-->
+<!-- 		select * from sunportfolio where seq between ${start} and ${end} order by seq desc -->
+		SELECT * FROM (
+		    SELECT 
+		        ROWNUM as rnum, notice.* FROM (
+		            select * from sunportfolio a 
+		        order by con_date desc
+		    ) notice
+		) WHERE rnum BETWEEN ${start} AND ${end}
+	</select>
+	
+	<select id="count10" resultType="sun.spring.dto.ContactDTO">
+		<!-- 한페이지당 10개씩 게시물 보이기 
+			1. 페이지가 1번일 때 제일 최근에 올라간 순서 대로 게시글 10개가 보여야한다.
+			2. 총 게시글이 만일 25개면 10개씩 잘라서 페이지가 3페이지 나와야 한다.
+		-->
+		select * from sunportfolio where seq between '1' and '10' order by seq desc
+	</select>
+	
+	<select id="conview" resultType="sun.spring.dto.ContactDTO">
+		select * from sunportfolio where seq=${seq}
+	</select>
+	
+	<delete id="delete">
+		delete from sunportfolio where seq=${seq}
+	</delete>
+	
+	<update id="modify">
+		update sunportfolio set title=#{title}, content=#{content} where seq=${seq}
+	</update>
+	
+	
+</mapper>

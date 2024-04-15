@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+	<select id="selectMember" resultType="sun.spring.dto.AdminDTO">
+		select seq, id, pw from adminmember where id=#{id} and pw=#{pw}
+	</select>
+
+	<insert id="insertAdminIpCk">
+		insert into ipCk (seq, ip, visitDate) values(ipCkSeq.nextval, #{ip}, sysdate)
+	</insert>
+
+	<update id="updateAdminIpCk">
+		update ipCk set visitcnt = (visitcnt+1)	where ip=#{ip} and to_date(sysdate,'YY/MM/DD')= visitdate
+	</update>
+
+	<select id="selectIpExistCk" resultType="int">
+		select count(*) from ipCk where ip=#{ip} and to_date(sysdate,'YY/MM/DD') = visitdate
+	</select>
+
+	<select id="selectTodayTotalCut" resultType="int">
+		select count(*) from ipCk where to_date(sysdate,'YY/MM/DD') = visitdate
+	</select>
+
+	<select id="selectYesterDayTotalCut" resultType="Integer">
+		select * from ipCk where to_date(sysdate-1,'YY/MM/DD') = visitdate
+	</select>
+
+	<select id="selectTotalV" resultType="int">
+		select count(1) from ipCk
+	</select>
+
+	<select id="conview" resultType="sun.spring.dto.ContactDTO">
+		select * from sunportfolio where seq = ${seq}
+	</select>
+
+	<update id="receiptUpdate">
+		update sunportfolio set category = #{category}, title = #{title}, company = #{company}, grade = #{grade}, name = #{name}, tel = #{tel}, content = #{content} where seq = ${seq}
+	</update>
+
+	<!-- comment -->
+	<insert id="commentInsert">
+		insert into sun_comment values (sun_commentSeq.nextval, #{sunportfolioSeq}, #{name}, #{commentText}, sysdate)
+	</insert>
+
+	<!-- comment 조회 -->
+	<select id="commentSelect"
+		resultType="sun.spring.dto.CommentDTO">
+		select * from sun_comment where sunportfolioSeq = ${sunportfolioSeq}
+	</select>
+
+	<delete id="commentDelete">
+		delete from sun_comment where seq = ${seq} and sunportfolioSeq = ${sunportfolioSeq}
+	</delete>
+
+	<select id="boardCount10" parameterType="hashMap" resultType="sun.spring.dto.ContactDTO">
+		select * from ( select rownum as rnum, sun.* from( select seq, title, name, content, contact, con_date from sunportfolio where contact=#{contact} order by con_date desc) sun) where rnum between ${start} and ${end}
+	</select>
+
+	<update id="contactChange">
+		update sunportfolio set contact = #{contact} where seq = #{seq}
+	</update>
+
+</mapper>

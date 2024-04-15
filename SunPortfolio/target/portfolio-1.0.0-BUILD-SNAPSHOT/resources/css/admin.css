@@ -1,0 +1,132 @@
+input[type="text"], input[type="password"], textarea[name="content"] {
+    background: #333;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom:20px;
+}
+
+#admin_Main {width:100%; height:100%; background:#202020;}
+#admin_Main iframe {position:absolute; top:-10%; z-index:-10;}
+#admin_mem {text-align:center; position:absolute; top:50%; left:50%; margin-top:-220px; margin-left:-200px; width:400px; padding:50px;}
+#admin_mem li {color: rgb(255 255 255 / 50%); font-weight: 200; font-size:14px; margin-bottom:20px;}
+#admin_mem li img{width:100px; padding-bottom:20px;}
+#admin_mem input{width:100%; padding:15px;}
+
+input[type="submit"]{background: #333;
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom:20px;}
+input[type="submit"]:hover {
+	border: 1px solid #ffea00;
+    background: #ffea00;
+    color: #000;
+}
+
+button{background: #333;
+    border: 1px solid #fff;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;}
+button:hover {
+	border: 1px solid #ffea00;
+    background: #fff;
+    color: #000;
+}
+
+
+/* header */
+/* admin header */
+body{margin:0;}
+#headerUserInfo{width:200px; padding:10px; background:#000; color:#fff; position: fixed; right:0; text-align:right; font-size:14px;}
+#adminNav{width:200px; position:fixed; left:0; top:0; height:100%; color:#fff; font-size:40px; background:#000;}
+#adminNav .logo{ position: absolute; top: 50px; left: 50%; margin-left: -28px;}
+#adminNav #adminMenu{color: #fff; margin-left:20px; font-size: 4rem; margin-top:180px;}
+#adminNav #adminMenu > li:nth-child(1){margin-bottom:60px;}
+#adminNav #adminMenu ul li:nth-child(1){margin-top:30px;}
+#adminNav #adminMenu ul li{font-size:2rem; margin-bottom:10px; color:#fff; padding-bottom:15px;}
+#con{margin-left:200px; min-height: 900px; padding:50px;}
+
+/* contact list */
+#StepIng{width:200px; background:#000; color:rgba(255, 255, 255, 0.6); padding:8px;}
+.ck{background:#000; border:1px solid #ddd;}
+
+/*contact view*/
+.adminContact .ab_con{width:100%; font-size:1.4rem; float:right;}
+.adminContact .ab_con{width:100%; font-size:1.4rem; float:right;}
+.adminContact table{width:100%; text-align:center; vertical-align: middle;}
+.adminContact table th{color:#fff; width:200px; font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:16px 0; vertical-align: middle;}
+.adminContact table td{text-align:left; color:rgba(255, 255, 255, 0.3); font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:16px 0;}
+.adminContact table td img{width:250px;}
+.adminContact table a{color:rgba(255, 255, 255, 0.3);}
+.adminContact #selTel{width:20%; background:#333; color:#fff; border:none; padding: 10px; border-radius:5px;}
+.adminContact #category{width:50%; background:#333; color:#fff; border:none; padding: 10px; border-radius:5px;}
+.adminContact select option{border:none;}
+.adminContact textarea{text-align:left;}
+
+.adminContact{overflow:auto; padding: 0 0 160px; clear: both;}
+.adminContact .tit_au_c{width:10%; border-bottom:1px solid rgba(255, 255, 255, 0.2); padding-bottom:8px; float:left;}
+.adminContact .tit_au_c:before{ content:""; width:4px; height:4px; background:#ffea00; border-radius:50%; display:inline-block; vertical-align: middle; margin-right:20px;}
+.adminContact .send input{padding:20px 0; width:200px; border-radius:5px; background:#333; border:none; font-size:18px; color:#fff; cursor:pointer; -webkit-transition:.4s; -moz-transition:.4s; -ms-transition:.4s; -o-transition:.4s; transition:.4s;}
+.adminContact .send input:hover{background:#ffea00; color:#000;}
+
+.adminContact #iframeA{width:60%; float:left; height:100%;}
+.adminContact #comment{position:relative; padding:2%; padding-bottom:0; width:35%; margin-left:5%; float:left; background:#4242426b; padding-bottom:140px;}
+.adminContact #comment .commentLi{}
+.adminContact #comment .commentLi li:nth-child(1){width:86px; float:left;}
+.adminContact #comment .commentLi li:nth-child(2){text-align:left; font-size:20px; color:#fff; margin-top:34px;}
+.adminContact #comment .commentLi li:nth-child(2) .date{float:right; font-size:14px; color:#ffffff57;}
+.adminContact #comment .commentLi .commenBtn{width:100%; text-align:right; display: inline-block;}
+.adminContact #comment .commentLi .commenBtn button{border:1px solid #ddd; padding:8px; margin-right:14px; display:inline-block; border:1px solid #ddd; background:none; color:#fff; margin-top:20px;}
+.adminContact #comment .commentLi .commentext{color:#ffffff57; font-size:14px; font-weight:100; width:290px; float:right; line-height:1.4em; margin-top:16px;}
+.adminContact #comment .commentLi .clicle{width:60px; height:60px; border-radius:50%; background:#fff; font-weight:400; display:inline-block;}
+.adminContact #comment h3{color:#fff; font-size:40px; margin-bottom:20px; padding-bottom:20px;}
+.adminContact #commentText{display:inline-block; width:80%; min-height:100px; color:#fff; display:block; position:absolute; bottom:0; left:0; margin-bottom:0; background:#3a3a3a; border-radius:0;}
+#commentSave #commentSaveBtn{display:inline-block; width:20%; min-height:100px; position: absolute; bottom: 0; right: 0; border-radius:0;}
+
+/* contact */
+#conModify{padding:5px 10px; border:1px solid #fff; margin-left:50px;}
+.admContactViewBtn{margin-bottom:48px;}
+
+
+/* main */
+#homePageStats{color: #fff; }
+#homePageStats ul{overflow:hidden;}
+#homePageStats ul li{float:left; margin-left:36px; padding-right:36px; }
+#homePageStats ul li dl dt{font-size: 16px; margin-bottom:16px; color:#ffffff5c;}
+#homePageStats ul li dl dd{font-size: 48px;}
+
+#contactUl a{ color:#fff;}
+
+/**/
+#save {border: 1px solid #ddd; padding: 8px; margin-right: 14px; display: inline-block; border: 1px solid #ddd; background: none; color: #fff; margin-top: 20px;float:right; margin-bottom:20px; cursor: pointer;}
+#save:hover {border: 1px solid #ddd; padding: 8px; margin-right: 14px; display: inline-block; border: 1px solid #ddd; background: #ededed; margin-top: 20px;float:right; margin-bottom:20px; color:#000;}
+
+/* admin 타이틀 */
+.admin_tit_s1 {margin-bottom:40px;}
+.admin_tit_s1 dl {color:#fff; line-height:1.4;}
+.admin_tit_s1 dl dt { font-size:4rem; font-weight:700; position:relative; display:inline-block; padding-right:44px; padding-bottom: 16px;}
+.admin_tit_s1 dl dd {}
+.admin_tit_s1 dl dd span { font-size:2rem; font-weight:100; opacity:0.6; display:block; margin-bottom:10px;}
+.admin_tit_s1 dl dd p {opacity:0.2; font-size:1.5rem; font-weight:100; line-height:1.714em;}
+.admin_tit_s1 ul {overflow:auto;}
+.admin_tit_s1 ul li { border:1px solid #373737; text-align:center; font-size:1.5rem; color:#fff; font-weight:100; opacity:1; width:33.3%; float:left; margin-bottom:20px;}
+.admin_tit_s1 ul li a{padding:10px 10px; font-size:1.5rem; font-weight:100; width:100%; display: inline-block; color:#fff;}
+.admin_tit_s1 ul li a:hover{background: #ffea00; color: #000; opacity:1;}
+.admin_tit_s1_text{width:100%; overflow:auto; }
+.admin_tit_s1_text p{float:left; width:50%;}
+.admin_tit_s1_text ul{float: right; width: 32%; font-size: 1.5rem; color: rgba(255, 255, 255, 0.5); font-weight: 100;}
+.admin_tit_s1_text ul li{display:inline-block; margin-left:14%;}
+.current_tab1{background: #ffea00; color: #000; opacity:1;}
+
+
+
+
+
+
+
+
+

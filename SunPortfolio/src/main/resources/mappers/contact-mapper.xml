@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="contact">
+	<insert id="insert">
+		insert into sunportfolio values(sunportfolio_seq.nextval, #{category}, #{title}, #{company}, #{grade}, #{name}, #{tel}, #{content}, sysdate, #{boardck}, #{filename}, #{contact}, #{fileVolume, jdbcType=BLOB})
+	</insert>
+	
+	<insert id ="insert_File">
+		insert into SUN_CONTACT_FILE values(SUN_CONTACT_FILE_SEQ.nextval, #{sysname}, #{oriname}, sunportfolio_seq.currval)
+	</insert>
+	
+	<select id="select" resultType="sun.spring.dto.ContactDTO">
+		select * from sunportfolio order by seq desc
+	</select>
+	
+	<select id="allBoardCount" resultType="int">
+		<!-- 게시물 총 갯수 -->
+		select count(*) from sunportfolio order by seq
+	</select>
+	
+	<select id="boardCount10" parameterType="hashMap" resultType="sun.spring.dto.ContactDTO">
+		select * from (
+		    select rownum as rnum, sun.* from(
+		        select seq, title, name, content, con_date from sunportfolio order by con_date desc
+		    ) sun
+		) where rnum between ${start} and ${end}
+	</select>
+	
+	<select id="conview" resultType="sun.spring.dto.ContactDTO">
+		select * from sunportfolio where seq=${seq}
+	</select>
+	
+	<select id="conviewImg" resultType="sun.spring.dto.ContactDTO">
+		select * from SUN_CONTACT_FILE where #{contactSeq}=${seq}
+	</select>
+	
+	<delete id="delete">
+		delete from sunportfolio where seq=${seq}
+	</delete>
+	
+	<update id="modify">
+		update sunportfolio set category=#{category}, title=#{title}, company=#{company}, grade=#{grade}, name=#{name}, tel=#{tel}, content=#{content} where seq=${seq}
+	</update>
+	
+	<select id="mathRandom" resultType="sun.spring.dto.ContactDTO">
+		select * from sunportfolio
+	</select>
+	
+</mapper>
