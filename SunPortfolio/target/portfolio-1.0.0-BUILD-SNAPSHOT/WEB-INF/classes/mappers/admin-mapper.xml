@@ -43,14 +43,17 @@
 	</insert>
 
 	<!-- comment 조회 -->
-	<select id="commentSelect"
-		resultType="sun.spring.dto.CommentDTO">
+	<select id="commentSelect" resultType="sun.spring.dto.CommentDTO">
 		select * from sun_comment where sunportfolioSeq = ${sunportfolioSeq}
 	</select>
 
 	<delete id="commentDelete">
 		delete from sun_comment where seq = ${seq} and sunportfolioSeq = ${sunportfolioSeq}
 	</delete>
+	
+	<update id="commentUpdate">
+		update sun_comment set commentText = #{commentText} where seq = ${seq} and sunportfolioSeq = ${sunportfolioSeq}
+	</update>
 
 	<select id="boardCount10" parameterType="hashMap" resultType="sun.spring.dto.ContactDTO">
 		select * from ( select rownum as rnum, sun.* from( select seq, title, name, content, contact, con_date from sunportfolio where contact=#{contact} order by con_date desc) sun) where rnum between ${start} and ${end}

@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/resources/css/reset.css">
 <link rel="stylesheet" href="/resources/css/admin.css">
+<link rel="stylesheet" href="/resources/css/popup.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/resources/js/admin/receipt.js"></script>
+<script src="/resources/js/admin/popup.js"></script>
 
 <style>
 	.container{
@@ -32,6 +34,16 @@
 	.tab-content.current{
 		display: inherit;
 	}
+
+	#category_area{
+		width:100%; background: #333;  border: none;  padding: 20px;  border-radius: 5px;  color: #fff;  margin-bottom: 20px;
+	}
+	.category_con{
+		background: #555;  border: none;  padding: 10px; margin:5px;  border-radius: 5px;  color: #fff;  margin-bottom: 20px;
+	}
+	.category_delete{
+		display: inline-block; margin-left:5px; background: none; border:none;
+	}
 </style>
 
 <div class="container adminContact">
@@ -46,7 +58,7 @@
 			<div class="inner1400">		
 				<div class="contact">
 					<div>
-					<button id="save">저장하기</button>
+						<button id="save">저장하기</button>
 					</div>
 					<input type="hidden" name="boardck" id="boardck" style="width:100%;" value="Y">
 					<div class="ab_con">
@@ -56,7 +68,9 @@
 								<th colspan="1">카테고리</th>
 								<td colspan="3">
 									<input type="text" id="seq" name ="seq" value="${con.seq}">
-									<input type="text" id="category" name="category" value="${con.category}">										
+									<input type="text" id="category" name="category" value="${con.category}">
+									<div id="category_area"></div>
+									<a href="javascript:openPop()" id="catagoryModify">수정</a>							
 								</td>
 							</tr>
 							<tr>
@@ -113,5 +127,89 @@
 	<div id="tab-3" class="tab-content" style="height:200px;">
 ---- ★-- -------- ---- ---- ---- -★- ---- ---- -------- ---- -★- ---- ---- ---- ---- -------- ---- ---- ---- ---- ---- --★ -------- ★-- ---- ---- ---- ---- ---- -------- ---- ---- --★ ---- ---- ---- -------- ---- ---- ---- --★
 	</div>  -->
+	
+	<!-- 레이어팝업 -->
+	<div class="popup_layer" id="popup_layer" style="display: none;">
+	  <div class="popup_box">
+		  <div style="height: 10px; width: 375px; float: top;">
+			<a href="javascript:closePop();">X</a>
+		  </div>
+		  <!--팝업 컨텐츠 영역-->
+		  <div class="popup_cont" id="popup_cont">
+			  <h5>카테고리 수정</h5>
+			  <div class="mb20">
+				<h3 class="pb10">웹개발</h3>
+				<input type="checkbox" name="border" id="border01" value="border01">
+				<label for="border01">일반게시판</label>
+				<input type="checkbox" name="border" id="border02" value="border02">
+				<label for="border02">커스텀 게시판</label>
+			  </div>
+			  <div class="mb20">
+				<h3 class="pb10">웹개발 부가기능</h3>
+				<input type="checkbox" name="val" id="val01" value="print">
+				<label for="val01">프린트 기능</label>
+				<input type="checkbox" name="val" id="val02" value="mms">
+				<label for="val02">문자</label>
+				<input type="checkbox" name="val" id="val03" value="excel">
+				<label for="val03">엑셀기능</label>
+			  </div>
+			  <div class="mb20">
+				<h3 class="pb10">디자인</h3>
+				<input type="checkbox" name="design" id="design01" value="webDesign">
+				<label for="design01">웹디자인</label>
+				<input type="checkbox" name="design" id="design02" value="popUpDesign">
+				<label for="design02">팝업디자인</label>
+				<input type="checkbox" name="design" id="design03" value="subPageDesign">
+				<label for="design03">서브페이지 디자인</label>
+			  </div>
+		  </div>
 
+		  <button onclick="sendPop()">제출</button>
+		  <!--팝업 버튼 영역-->
+		  <div class="popup_btn" style="margin-top: 20px;">
+			  <a href="javascript:closePop();">닫기</a>
+		  </div>
+	  </div>
+	</div>
 </div>
+
+<script>
+	function sendPop(){
+		$("#popup_cont").is(":checked");
+		$('input:checkbox[name=border]').each(function(index){
+			if($(this).is(":checked")==true){
+				console.log("border : " + $(this).val());
+				let newSpan = $("<span class='category_con'>"+ $(this).val() +"<button class='category_delete'>x</button> </span>");
+				$("#category_area").append(newSpan);
+			}
+		})
+
+		$('input:checkbox[name=val]').each(function(index){
+			if($(this).is(":checked")==true){
+				console.log("val : " + $(this).val());
+				let newSpan = $("<span class='category_con'>"+ $(this).val() +"<button class='category_delete'>x</button> </span>");
+				$("#category_area").append(newSpan);
+			}
+		})
+
+		$('input:checkbox[name=design]').each(function(index){
+			if($(this).is(":checked")==true){
+				console.log("design : " + $(this).val());
+				let newSpan = $("<span class='category_con'>"+ $(this).val() +"<button class='category_delete'>x</button> </span>");
+				$("#category_area").append(newSpan);
+			}
+		})
+
+
+	}
+
+	//팝업 띄우기
+	function openPop() {
+		document.getElementById("popup_layer").style.display = "block";
+	}
+
+	//팝업 닫기
+	function closePop() {
+		document.getElementById("popup_layer").style.display = "none";
+	}
+</script>

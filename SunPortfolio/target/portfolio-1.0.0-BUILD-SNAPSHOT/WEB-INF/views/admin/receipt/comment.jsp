@@ -35,14 +35,25 @@
 								</li>
 								
 								<li>${commentVO.name} <span class="date">${commentVO.commentDate}</span></li>
-								<li class="commentext">
-									${commentVO.commentText}
+								<li class="comment">
+									<span class="commentText">${commentVO.commentText}</span>
+									<div class="commentTextModify">
+										<input type="text" id="commentTextModify" value="${commentVO.commentText}">
+									</div>
+									
+									<div class="commenBtn">
+										<span class="modifyHiddenBtn">
+											<button class="commentModify">수정</button>
+											<button class="commentDelete">삭제</button>	
+										</span>
+										<span class="modifyShowBtn">
+											<button class="commentSave">저장</button>
+											<button class="commentCancel">취소</button>
+										</span>							
+									</div>
 								</li>
 							</ul>
-							<div class="commenBtn">
-								<button class="commentModify">수정</button>
-								<button class="commentDelete">삭제</button>
-							</div>
+							
 						</li>
 					</c:if>
 				</c:forEach>

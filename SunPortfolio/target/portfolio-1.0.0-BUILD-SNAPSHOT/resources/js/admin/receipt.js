@@ -2,9 +2,10 @@
  * 접수 상세페이지 
  */
 $(document).ready(function(){
+
 	//컨텐트 높이값 변동 되게 가져옴.
 	var tabHeight = $('#outerheight').outerHeight(true); 
-	parent.heightChange(tabHeight);
+	//parent.heightChange(tabHeight);
 	
 	//탭변경에 따른 컨텐트 높이값 변동 되게 가져옴.
 	$('ul.tabs li').click(function(){
@@ -20,6 +21,11 @@ $(document).ready(function(){
 		var tabHeight = $('#outerheight').outerHeight(true); 
 		parent.heightChange(tabHeight);
 	});
+
+	
+	$(".modifyShowBtn").css("display", "none");
+	$(".modifyHiddenBtn").css("diplay","inline-block");
+	$(".comment .commentTextModify").css("display", "none");
 	
 	$('#sendSns').click(function(){
 		//location.href = "../aligo/adminContactListProc?cpage=1";		
@@ -92,11 +98,29 @@ $(document).ready(function(){
 	});
 	
 	/* 코멘트 수정하기 */
-	$(".commentModify").click(function(){
+	$(".commentModify").on('click',function(){
+		let target = this;
+		console.log(target);
+		let comment = target.closest('div');
+		comment.parentElement.children[0].style['display'] = 'none'; //commentText
+		comment.parentElement.children[1].style['display'] = 'inline-block'; //commentTextModify
+		comment.parentElement.children[2].children[0].style['display'] = 'none'; //commenBtn  modifyHiddenBtn
+		comment.parentElement.children[2].children[1].style['display'] = 'inline-block'; //commenBtn  modifyShowBtn
+	});
+	
+	/* 코멘트 수정 클릭 후 취소 누를 때 */
+	$(".commentCancel").on('click',function(){
+		let target = this;
+		console.log(target);
+		let comment = target.closest('div');
+		comment.parentElement.children[0].style['display'] = 'inline-block'; //commentText
+		comment.parentElement.children[1].style['display'] = 'none'; //commentTextModify
+		comment.parentElement.children[2].children[0].style['display'] = 'inline-block'; //commenBtn  modifyHiddenBtn
+		comment.parentElement.children[2].children[1].style['display'] = 'none'; //commenBtn  modifyShowBtn
 		
 	});
 	
-	/* 코멘트 수정하기 */
+	/* 코멘트 삭제하기 */
 	$(".commentDelete").click(function(){
 		$.ajax({
 			type : "post",
@@ -112,7 +136,30 @@ $(document).ready(function(){
 			alert(erro1);
 		});
 	});
-		
+	
+	/*코멘트 수정항목 저장하기 */
+	$(".commentSave").click(function(){
+		alert("들어갔나/?");
+		$.ajax({
+			type : "post",
+			url : "/admin/commentUpdate",
+			data : {
+				seq : $(this).closest(".commentLi").find("#seq").val(),
+				sunportfolioSeq : $(this).closest(".commentLi").find("#sunportfolioSeq").val(),
+				commentText : $(this).closest(".commentLi").find("#commentTextModify").val()
+			}
+		}).done(function(resp){
+			alert(resp);
+			location.reload();
+		}).fail(function(erro1,erro2){
+			alert(erro1);
+		});
+	});
+
+
+
+
+
 });
 
 

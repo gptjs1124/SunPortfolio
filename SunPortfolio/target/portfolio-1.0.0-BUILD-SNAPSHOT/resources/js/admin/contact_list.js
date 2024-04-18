@@ -51,4 +51,24 @@ $(function(){
 		});
 	});
 	
+	
+	//script 구문 내부에 해당 메소드를 입력합니다.
+	$( "#datepicker1" ).datepicker({
+		showOn: "both", 
+        buttonImage: "button.png", 
+        buttonImageOnly: true 
+    });
+	
+	$( "#datepicker2" ).datepicker({
+		showOn: "both", 
+        buttonImage: "button.png", 
+        buttonImageOnly: true 
+    });
+	
+	
+	
+	
+	
+	
+	
 });

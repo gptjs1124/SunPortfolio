@@ -1,12 +1,44 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false"%>
 
 <jsp:include page="header.jsp" />
 <script type="text/javascript" src="/resources/js/admin/contact_list.js"></script>
 <article id="Aboutus" class="sub_cont">
 	<div class="inner1400">
+		<div class="admin_tit_s1">
+			<form>
+				<div id="tab_title">검색</div>
+				<table id="search">
+					<tr>
+						<th>제목</th>
+						<td><input type="text" id="title"></td>
+						<th>내용</th>
+						<td><input type="text" id="content"></td>
+					</tr>
+					<tr>
+						<th>날씨</th>
+						<td>
+							<input type="text" id="datepicker1">
+							<input type="text" id="datepicker2">
+						</td>
+						<th>진행단계</th>
+						<td>
+							<select class="StepIng" name="StepIng">
+								<option value="접수" <c:if test="${no.contact eq '접수'}">selected</c:if>>접수</option>
+								<option value="진행" <c:if test="${no.contact eq '진행'}">selected</c:if>>진행</option>
+								<option value="완료" <c:if test="${no.contact eq '완료'}">selected</c:if>>완료</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="4" style="border-bottom: none; text-align: right; padding-top:8px;">
+							<button>검색</button>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
 
 		<div class="admin_tit_s1">
 			<dl>
