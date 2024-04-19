@@ -3,8 +3,9 @@
  */
 $(document).ready(function(){
 
+	/*
 	//컨텐트 높이값 변동 되게 가져옴.
-	var tabHeight = $('#outerheight').outerHeight(true); 
+	var tabHeight = $('#outerheight').outerHeight(true);
 	//parent.heightChange(tabHeight);
 	
 	//탭변경에 따른 컨텐트 높이값 변동 되게 가져옴.
@@ -21,6 +22,7 @@ $(document).ready(function(){
 		var tabHeight = $('#outerheight').outerHeight(true); 
 		parent.heightChange(tabHeight);
 	});
+	 */
 
 	
 	$(".modifyShowBtn").css("display", "none");
@@ -139,7 +141,6 @@ $(document).ready(function(){
 	
 	/*코멘트 수정항목 저장하기 */
 	$(".commentSave").click(function(){
-		alert("들어갔나/?");
 		$.ajax({
 			type : "post",
 			url : "/admin/commentUpdate",
@@ -155,11 +156,6 @@ $(document).ready(function(){
 			alert(erro1);
 		});
 	});
-
-
-
-
-
 });
 
 

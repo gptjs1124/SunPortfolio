@@ -3,151 +3,158 @@ package sun.spring.dto;
 import java.sql.Timestamp;
 
 public class CodeGroup {
-	private String cmnsCdGroupId;
-	private String cmnsCdGroupNm;
-	private char useYn;
-	private String cmnsCdTypeNm;
-	private String cmnsCdGroupAbrvCd;
-	private String cmnsCdGroupExpln;
-	private String upCmnsCdGroupId;
-	private Timestamp frstRegDt;
-	private String frstRgtrId;
-	private Timestamp lastMdfcnDt;
-	private String lastMdfrId;
+	private String cmns_cd_group_id;
+	private String cmns_cd_group_nm;
+	private char use_yn;
+	private String cmns_cd_type_nm;
+	private String cmns_cd_group_abrv_cd;
+	private String cmns_cd_group_expln;
+	private String up_cmns_cd_group_id;
+	private Timestamp frst_reg_dt;
+	private String frst_rgtr_id;
+	private Timestamp last_mdfcn_dt;
+	private String last_mdfr_id;
 
+	private String cmns_cd;
+	private String cmns_cd_nm;
+	private int sort_no;
+	private String cmns_cd_expln;
+	private String cmns_cd_addt_cn1;
+	private String up_cmns_cd;
 
-	private String cmnsCd;
-	private String cmnsCdNm;
-	private int sortNo;
-	private String cmnsCdExpln;
-	private String cmnsCdAddtCn1;
-
-
-	public String getCmnsCdGroupId() {
-		return cmnsCdGroupId;
+	public String getCmns_cd_group_id() {
+		return cmns_cd_group_id;
 	}
 
-	public void setCmnsCdGroupId(String cmnsCdGroupId) {
-		this.cmnsCdGroupId = cmnsCdGroupId;
+	public void setCmns_cd_group_id(String cmns_cd_group_id) {
+		this.cmns_cd_group_id = cmns_cd_group_id;
 	}
 
-	public String getCmnsCdGroupNm() {
-		return cmnsCdGroupNm;
+	public String getCmns_cd_group_nm() {
+		return cmns_cd_group_nm;
 	}
 
-	public void setCmnsCdGroupNm(String cmnsCdGroupNm) {
-		this.cmnsCdGroupNm = cmnsCdGroupNm;
+	public void setCmns_cd_group_nm(String cmns_cd_group_nm) {
+		this.cmns_cd_group_nm = cmns_cd_group_nm;
 	}
 
-	public char getUseYn() {
-		return useYn;
+	public char getUse_yn() {
+		return use_yn;
 	}
 
-	public void setUseYn(char useYn) {
-		this.useYn = useYn;
+	public void setUse_yn(char use_yn) {
+		this.use_yn = use_yn;
 	}
 
-	public String getCmnsCdTypeNm() {
-		return cmnsCdTypeNm;
+	public String getCmns_cd_type_nm() {
+		return cmns_cd_type_nm;
 	}
 
-	public void setCmnsCdTypeNm(String cmnsCdTypeNm) {
-		this.cmnsCdTypeNm = cmnsCdTypeNm;
+	public void setCmns_cd_type_nm(String cmns_cd_type_nm) {
+		this.cmns_cd_type_nm = cmns_cd_type_nm;
 	}
 
-	public String getCmnsCdGroupAbrvCd() {
-		return cmnsCdGroupAbrvCd;
+	public String getCmns_cd_group_abrv_cd() {
+		return cmns_cd_group_abrv_cd;
 	}
 
-	public void setCmnsCdGroupAbrvCd(String cmnsCdGroupAbrvCd) {
-		this.cmnsCdGroupAbrvCd = cmnsCdGroupAbrvCd;
+	public void setCmns_cd_group_abrv_cd(String cmns_cd_group_abrv_cd) {
+		this.cmns_cd_group_abrv_cd = cmns_cd_group_abrv_cd;
 	}
 
-	public String getCmnsCdGroupExpln() {
-		return cmnsCdGroupExpln;
+	public String getCmns_cd_group_expln() {
+		return cmns_cd_group_expln;
 	}
 
-	public void setCmnsCdGroupExpln(String cmnsCdGroupExpln) {
-		this.cmnsCdGroupExpln = cmnsCdGroupExpln;
+	public void setCmns_cd_group_expln(String cmns_cd_group_expln) {
+		this.cmns_cd_group_expln = cmns_cd_group_expln;
 	}
 
-	public String getUpCmnsCdGroupId() {
-		return upCmnsCdGroupId;
+	public String getUp_cmns_cd_group_id() {
+		return up_cmns_cd_group_id;
 	}
 
-	public void setUpCmnsCdGroupId(String upCmnsCdGroupId) {
-		this.upCmnsCdGroupId = upCmnsCdGroupId;
+	public void setUp_cmns_cd_group_id(String up_cmns_cd_group_id) {
+		this.up_cmns_cd_group_id = up_cmns_cd_group_id;
 	}
 
-	public Timestamp getFrstRegDt() {
-		return frstRegDt;
+	public Timestamp getFrst_reg_dt() {
+		return frst_reg_dt;
 	}
 
-	public void setFrstRegDt(Timestamp frstRegDt) {
-		this.frstRegDt = frstRegDt;
+	public void setFrst_reg_dt(Timestamp frst_reg_dt) {
+		this.frst_reg_dt = frst_reg_dt;
 	}
 
-	public String getFrstRgtrId() {
-		return frstRgtrId;
+	public String getFrst_rgtr_id() {
+		return frst_rgtr_id;
 	}
 
-	public void setFrstRgtrId(String frstRgtrId) {
-		this.frstRgtrId = frstRgtrId;
+	public void setFrst_rgtr_id(String frst_rgtr_id) {
+		this.frst_rgtr_id = frst_rgtr_id;
 	}
 
-	public Timestamp getLastMdfcnDt() {
-		return lastMdfcnDt;
+	public Timestamp getLast_mdfcn_dt() {
+		return last_mdfcn_dt;
 	}
 
-	public void setLastMdfcnDt(Timestamp lastMdfcnDt) {
-		this.lastMdfcnDt = lastMdfcnDt;
+	public void setLast_mdfcn_dt(Timestamp last_mdfcn_dt) {
+		this.last_mdfcn_dt = last_mdfcn_dt;
 	}
 
-	public String getLastMdfrId() {
-		return lastMdfrId;
+	public String getLast_mdfr_id() {
+		return last_mdfr_id;
 	}
 
-	public void setLastMdfrId(String lastMdfrId) {
-		this.lastMdfrId = lastMdfrId;
+	public void setLast_mdfr_id(String last_mdfr_id) {
+		this.last_mdfr_id = last_mdfr_id;
 	}
 
-	public String getCmnsCd() {
-		return cmnsCd;
+	public String getCmns_cd() {
+		return cmns_cd;
 	}
 
-	public void setCmnsCd(String cmnsCd) {
-		this.cmnsCd = cmnsCd;
+	public void setCmns_cd(String cmns_cd) {
+		this.cmns_cd = cmns_cd;
 	}
 
-	public String getCmnsCdNm() {
-		return cmnsCdNm;
+	public String getCmns_cd_nm() {
+		return cmns_cd_nm;
 	}
 
-	public void setCmnsCdNm(String cmnsCdNm) {
-		this.cmnsCdNm = cmnsCdNm;
+	public void setCmns_cd_nm(String cmns_cd_nm) {
+		this.cmns_cd_nm = cmns_cd_nm;
 	}
 
-	public int getSortNo() {
-		return sortNo;
+	public int getSort_no() {
+		return sort_no;
 	}
 
-	public void setSortNo(int sortNo) {
-		this.sortNo = sortNo;
+	public void setSort_no(int sort_no) {
+		this.sort_no = sort_no;
 	}
 
-	public String getCmnsCdExpln() {
-		return cmnsCdExpln;
+	public String getCmns_cd_expln() {
+		return cmns_cd_expln;
 	}
 
-	public void setCmnsCdExpln(String cmnsCdExpln) {
-		this.cmnsCdExpln = cmnsCdExpln;
+	public void setCmns_cd_expln(String cmns_cd_expln) {
+		this.cmns_cd_expln = cmns_cd_expln;
 	}
 
-	public String getCmnsCdAddtCn1() {
-		return cmnsCdAddtCn1;
+	public String getCmns_cd_addt_cn1() {
+		return cmns_cd_addt_cn1;
 	}
 
-	public void setCmnsCdAddtCn1(String cmnsCdAddtCn1) {
-		this.cmnsCdAddtCn1 = cmnsCdAddtCn1;
+	public void setCmns_cd_addt_cn1(String cmns_cd_addt_cn1) {
+		this.cmns_cd_addt_cn1 = cmns_cd_addt_cn1;
+	}
+
+	public String getUp_cmns_cd() {
+		return up_cmns_cd;
+	}
+
+	public void setUp_cmns_cd(String up_cmns_cd) {
+		this.up_cmns_cd = up_cmns_cd;
 	}
 }

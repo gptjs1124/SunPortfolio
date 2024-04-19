@@ -8,10 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import sun.spring.dto.AdminDTO;
-import sun.spring.dto.AdminIpCkDTO;
-import sun.spring.dto.CommentDTO;
-import sun.spring.dto.ContactDTO;
+import sun.spring.dto.*;
 
 @Repository
 public class AdminDAO {
@@ -122,4 +119,14 @@ public class AdminDAO {
 	public int selectBoxVal(ContactDTO con) throws Exception{
 		return mybatis.update("contactChange",con);
 	}
+
+	public List<CodeGroup> codeGroupSelect(CodeGroup codeGroup) throws Exception{
+		return mybatis.selectList("codeGroupSelect", codeGroup);
+	}
+
+	/* 공통코드 불러오기 :: 카테고리 메뉴 */
+	public List<CodeGroup> codeSelect(CodeGroup codeGroup) throws Exception{
+		return mybatis.selectList("codeSelect", codeGroup);
+	}
+
 }

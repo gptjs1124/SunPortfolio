@@ -1,6 +1,7 @@
 package sun.spring.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sun.spring.dto.AdminDTO;
+import sun.spring.dto.CodeGroup;
 import sun.spring.dto.CommentDTO;
 import sun.spring.dto.ContactDTO;
 import sun.spring.service.AdminService;
@@ -96,13 +98,14 @@ public class AdminController {
 		ContactDTO con = new ContactDTO();
 		con.setSeq(Integer.parseInt(seq));
 		con = aservice.conView(con);
-		
+
 		CommentDTO commentDTO = new CommentDTO();
 		commentDTO.setSunportfolioSeq(Integer.parseInt(seq));
 		List<CommentDTO> commentList = aservice.commentSelect(commentDTO);
-		
+
 		model.addAttribute("con", con);
 		model.addAttribute("commentList", commentList);
+
 		return "/admin/receipt/comment";
 	}
 	
@@ -113,9 +116,32 @@ public class AdminController {
 		ContactDTO con = new ContactDTO();
 		con.setSeq(Integer.parseInt(seq));
 		con = aservice.conView(con);
-		
+
 		model.addAttribute("con", con);
+
 		return "/admin/receipt/receiptProc";
+	}
+
+	@ResponseBody
+	@RequestMapping("codeGroupSelect")
+	public List<CodeGroup> codeGroupSelect(HttpServletRequest request, Model model) throws Exception{
+		CodeGroup codeGroup = new CodeGroup();
+		String cmnsCdGroupId = request.getParameter("cmns_cd_group_id"); // 프로젝트 < 카테고리
+		codeGroup.setCmns_cd_group_id(cmnsCdGroupId);
+
+		return aservice.codeGroupSelect(codeGroup);
+	}
+
+	@ResponseBody
+	@RequestMapping("codeSelect")
+	public List<CodeGroup> codeSelect(HttpServletRequest request, Model model) throws Exception{
+		CodeGroup codeGroup = new CodeGroup();
+		String cmnsCdGroupId = request.getParameter("cmns_cd_group_id");
+		String cmnsCd = request.getParameter("cmns_cd"); // 프로젝트 < 카테고리
+		codeGroup.setCmns_cd_group_id(cmnsCdGroupId);
+		codeGroup.setCmns_cd(cmnsCd);
+
+		return aservice.codeSelect(codeGroup);
 	}
 	
 	@ResponseBody

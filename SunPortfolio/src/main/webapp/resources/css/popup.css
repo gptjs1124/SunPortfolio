@@ -17,3 +17,44 @@
 /*오버레이 뒷배경*/
 .popup_overlay{position:fixed;top:0px;right:0;left:0;bottom:0;z-index:1001;;background:rgba(0,0,0,0.5);}
 /*popup*/
+
+
+
+.container{
+    width: 100%;
+    margin: 0 auto;
+}
+ul.tabs{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+ul.tabs li{
+    background: none;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+ul.tabs li.current{
+    background: #ededed;
+    color: #222;
+}
+.tab-content{
+    display: none;
+    padding: 15px;
+}
+.tab-content.current{
+    display: inherit;
+}
+
+#category_area{
+    width:100%; background: #333;  border: none;  padding: 20px;  border-radius: 5px;  color: #fff;  margin-bottom: 20px;
+}
+.category_con{
+    background: #555;  border: none;  padding: 10px; margin:5px;  border-radius: 5px;  color: #fff;  margin-bottom: 20px;
+}
+.category_delete{
+    display: inline-block; margin-left:5px; background: none; border:none;
+}
+.category_delete:hover{background: none; border:none;}

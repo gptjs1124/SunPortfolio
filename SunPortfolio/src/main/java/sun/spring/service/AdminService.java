@@ -1,15 +1,17 @@
 package sun.spring.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import sun.spring.dao.AdminDAO;
-import sun.spring.dto.AdminDTO;
-import sun.spring.dto.AdminIpCkDTO;
-import sun.spring.dto.CommentDTO;
-import sun.spring.dto.ContactDTO;
+import sun.spring.dto.*;
 
 @Service
 public class AdminService {
@@ -138,5 +140,15 @@ public class AdminService {
 	/**/
 	public int selectBoxVal(ContactDTO con) throws Exception{
 		return adao.selectBoxVal(con);
+	}
+
+	public List<CodeGroup> codeGroupSelect(CodeGroup codeGroup) throws Exception{
+		List<CodeGroup> codeGroupSelectData = adao.codeGroupSelect(codeGroup);
+		return codeGroupSelectData;
+	}
+
+	public List<CodeGroup> codeSelect(CodeGroup codeGroup) throws Exception{
+		List<CodeGroup> codeSelect = adao.codeSelect(codeGroup);
+		return codeSelect;
 	}
 }

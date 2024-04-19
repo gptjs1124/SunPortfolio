@@ -1,6 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page session="false"%>
 
 <jsp:include page="../header.jsp" />
@@ -67,8 +66,13 @@
 				</div>
 			</div>
 		</div>
-
-		
 	</div>
-
 </article>
+
+<script>
+	let iframe = document.getElementById('iframeA');
+
+	iframe.addEventListener('load', function(){
+		iframe.style.height = iframe.contentDocument.body.scrollHeight + 'px';
+	});
+</script>
