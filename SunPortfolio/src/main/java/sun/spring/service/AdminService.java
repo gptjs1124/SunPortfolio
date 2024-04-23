@@ -1,17 +1,15 @@
 package sun.spring.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import sun.spring.dao.AdminDAO;
 import sun.spring.dto.*;
+
 
 @Service
 public class AdminService {
@@ -150,5 +148,49 @@ public class AdminService {
 	public List<CodeGroup> codeSelect(CodeGroup codeGroup) throws Exception{
 		List<CodeGroup> codeSelect = adao.codeSelect(codeGroup);
 		return codeSelect;
+	}
+
+	public List<CodeGroup> getChooseMenu(ContactDTO cdto) throws Exception{
+		return adao.getChooseMenu(cdto);
+	}
+
+	public int deleteChooseMenu(CodeGroup codeGroup) throws Exception{
+		return  adao.deleteChooseMenu(codeGroup);
+	}
+
+	//@Transactional
+	public List<CodeGroup> deleteInsertChooseMenu(List<CodeGroup> codeGroupList) throws Exception{
+		//seq 기준 삭제
+		int updateResult = 0;
+		for( CodeGroup codeGroup : codeGroupList){
+			updateResult = adao.deleteAllMenu(codeGroup);
+			break; //한번만 삭제하면 해당 seq는 전부 삭제
+		}
+
+		List<CodeGroup> insertMenu = new ArrayList<CodeGroup>();
+		int insertResult = 0;
+		int seq = 0;
+		for( CodeGroup codeGroup : codeGroupList){
+			int cunt = 0;
+			seq = codeGroup.getSeq();
+			//if(updateResult > 0){
+				CodeGroup selectMenu = adao.insertWithCodeSelect(codeGroup);
+				selectMenu.setSeq(seq);
+				cunt = adao.insertChooseMenu(selectMenu);
+				if(cunt > 0){
+					insertResult++;
+				}
+
+			//}
+		}
+		if(insertResult > insertMenu.size()-1){
+			ContactDTO cdto = new ContactDTO();
+			cdto.setSeq(seq);
+			insertMenu = adao.getChooseMenu(cdto);
+		}else{
+			throw new Exception("insert 갯수가 안맞아");
+		}
+
+		return insertMenu;
 	}
 }

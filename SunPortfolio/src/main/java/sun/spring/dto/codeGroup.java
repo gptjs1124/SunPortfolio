@@ -3,6 +3,8 @@ package sun.spring.dto;
 import java.sql.Timestamp;
 
 public class CodeGroup {
+	private int seq; // 	SUNPORTFOLIO pk
+	private int categprymenuseq;
 	private String cmns_cd_group_id;
 	private String cmns_cd_group_nm;
 	private char use_yn;
@@ -21,6 +23,22 @@ public class CodeGroup {
 	private String cmns_cd_expln;
 	private String cmns_cd_addt_cn1;
 	private String up_cmns_cd;
+
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
+	public int getCategprymenuseq() {
+		return categprymenuseq;
+	}
+
+	public void setCategprymenuseq(int categprymenuseq) {
+		this.categprymenuseq = categprymenuseq;
+	}
 
 	public String getCmns_cd_group_id() {
 		return cmns_cd_group_id;

@@ -73,4 +73,66 @@
 		SELECT * FROM common_code WHERE CMNS_CD_GROUP_ID = #{cmns_cd_group_id} AND UP_CMNS_CD IS NOT NULL AND UP_CMNS_CD = #{cmns_cd}
 	</select>
 
+	<!-- 공통코드 불러오기 :: 각 컨텐츠 별 선택 메뉴 불러오기  -->
+	<select id="getChooseMenu" resultType="sun.spring.dto.CodeGroup">
+		SELECT
+			t2.SEQ,
+			t2.CATEGPRYMENUSEQ,
+			t2.CMNS_CD_GROUP_ID,
+			t2.CMNS_CD,
+			t2.CMNS_CD_NM,
+			t2.UP_CMNS_CD_GROUP_ID,
+			t2.UP_CMNS_CD
+		FROM
+			SUNPORTFOLIO t1
+				INNER JOIN categoryMenu t2
+				ON	t1.seq = t2.seq
+		WHERE
+			t1.seq = #{seq}
+	</select>
+
+	<delete id="deleteChooseMenu">
+		delete from categoryMenu where seq = ${seq} and categprymenuseq = ${categprymenuseq}
+	</delete>
+
+	<delete id="deleteAllMenu">
+		delete from categoryMenu where seq = ${seq}
+	</delete>
+
+	<!-- CATEGORYMENU insert를 하기 위한 sql -->
+	<select id="insertWithCodeSelect" resultType="sun.spring.dto.CodeGroup">
+		SELECT * FROM common_code WHERE CMNS_CD = #{cmns_cd}
+	</select>
+
+	<insert id="insertChooseMenu">
+		INSERT
+		INTO
+			KH.CATEGORYMENU
+		(
+			CATEGPRYMENUSEQ,
+			SEQ,
+			CMNS_CD_GROUP_ID,
+			CMNS_CD,
+			CMNS_CD_NM,
+			FRST_REG_DT,
+			FRST_RGTR_ID,
+			LAST_MDFCN_DT,
+			LAST_MDFR_ID,
+			UP_CMNS_CD_GROUP_ID,
+			UP_CMNS_CD
+		)VALUES(
+			  categoryMenu_seq.nextval,
+			  #{seq},
+			  #{cmns_cd_group_id},
+			  #{cmns_cd},
+			  #{cmns_cd_nm},
+			  CURRENT_TIMESTAMP,
+			  #{last_mdfr_id},
+			  CURRENT_TIMESTAMP,
+			  #{last_mdfr_id},
+			  #{up_cmns_cd_group_id},
+			  #{up_cmns_cd}
+		)
+	</insert>
+
 </mapper>

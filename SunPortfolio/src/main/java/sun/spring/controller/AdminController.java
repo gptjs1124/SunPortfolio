@@ -1,16 +1,22 @@
 package sun.spring.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import jdk.nashorn.internal.parser.JSONParser;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sun.spring.dto.AdminDTO;
@@ -117,7 +123,10 @@ public class AdminController {
 		con.setSeq(Integer.parseInt(seq));
 		con = aservice.conView(con);
 
+		List<CodeGroup> chooseMenuList = aservice.getChooseMenu(con);
+
 		model.addAttribute("con", con);
+		model.addAttribute("chooseMenuList", chooseMenuList);
 
 		return "/admin/receipt/receiptProc";
 	}
@@ -232,7 +241,47 @@ public class AdminController {
 		int result = aservice.selectBoxVal(contactDTO);
 		return 0;
 	}
-	
+
+	@ResponseBody
+	@RequestMapping("deleteChooseMenu")
+	public List<CodeGroup> deleteChooseMenu(CodeGroup codeGroup) throws Exception{
+		int result = aservice.deleteChooseMenu(codeGroup);
+		List<CodeGroup> chooseMenuList = new ArrayList<CodeGroup>();
+
+		if(result > 0){
+			ContactDTO cdto = new ContactDTO();
+			cdto.setSeq(codeGroup.getSeq());
+			chooseMenuList = aservice.getChooseMenu(cdto);
+		}
+
+		return chooseMenuList;
+	}
+
+	@ResponseBody
+	@RequestMapping("deleteInsertChooseMenu")
+	public List<CodeGroup> deleteInsertChooseMenu(@RequestBody HashMap<String, Object> map) throws Exception{
+
+		List<CodeGroup> codeGroupList = new ArrayList<CodeGroup>();
+		for(Map.Entry<String, Object> pair : map.entrySet()){
+			Map<String, Object> innerMap = (Map<String, Object>)pair.getValue();
+
+			CodeGroup codeGroup = new CodeGroup();
+			for(Map.Entry<String, Object> pair2 : innerMap.entrySet()){
+				String key = pair2.getKey();
+
+				if (key.equals("seq")) {
+					codeGroup.setSeq(Integer.parseInt(pair2.getValue().toString()));
+				} else if (key.equals("cmns_cd")) {
+					codeGroup.setCmns_cd(pair2.getValue().toString());
+				} else {
+					System.out.println("값이 없습니다.");
+				}
+			}
+			codeGroupList.add(codeGroup);
+		}
+
+		return aservice.deleteInsertChooseMenu(codeGroupList);
+	}
 }
 
 

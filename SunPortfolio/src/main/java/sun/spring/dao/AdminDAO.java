@@ -129,4 +129,24 @@ public class AdminDAO {
 		return mybatis.selectList("codeSelect", codeGroup);
 	}
 
+	public List<CodeGroup> getChooseMenu(ContactDTO cdto) throws Exception{
+		return mybatis.selectList("getChooseMenu", cdto);
+	}
+
+	public int deleteChooseMenu(CodeGroup codeGroup) throws Exception{
+		return mybatis.delete("deleteChooseMenu", codeGroup);
+	}
+
+	public int deleteAllMenu(CodeGroup codeGroup) throws Exception{
+		return mybatis.delete("deleteAllMenu", codeGroup);
+	}
+
+	public int insertChooseMenu(CodeGroup codeGroup) throws Exception{
+		return mybatis.insert("insertChooseMenu", codeGroup);
+	}
+
+	public CodeGroup insertWithCodeSelect(CodeGroup codeGroup) throws Exception{
+		return mybatis.selectOne("insertWithCodeSelect", codeGroup);
+	}
+
 }

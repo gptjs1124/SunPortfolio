@@ -7,6 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/resources/js/admin/receipt.js"></script>
 <script src="/resources/js/code.js"></script>
+<script src="/resources/js/getContactMenu.js"></script>
 
 <div class="container adminContact">
 	<ul class="tabs">
@@ -32,7 +33,12 @@
 								<td colspan="3">
 									<input type="text" id="seq" name ="seq" value="${con.seq}">
 									<%--<input type="text" id="category" name="category" value="${con.category}">--%>
-									<div id="category_area"></div>
+									<div id="category_area">
+										<c:forEach var="chooseMenu" items="${chooseMenuList}">
+											<span class="category_con" data-categprymenuseq="${chooseMenu.categprymenuseq}" data-cmnscd="${chooseMenu.cmns_cd}">${chooseMenu.cmns_cd_nm}<button class="category_delete">x</button> </span>
+										</c:forEach>
+
+									</div>
 									<a href="javascript:openPop()" id="catagoryModify">수정</a>							
 								</td>
 							</tr>
@@ -111,51 +117,3 @@
 	  </div>
 	</div>
 </div>
-
-<script>
-	function sendPop(){
-		$("#popup_cont").is(":checked");
-		$('input:checkbox[name=CM_DV]').each(function(index){
-			let getName = $(this).next().text();
-			if($(this).is(":checked") === true){
-				let newSpan = $("<span class='category_con' data-d ='"+ $(this).val() +"'>"+ getName +"<button class='category_delete'>x</button> </span>");
-				$("#category_area").append(newSpan);
-			}
-		})
-
-		$('input:checkbox[name=CM_DV_VAL]').each(function(index){
-			if($(this).is(":checked") === true){
-				let newSpan = $("<span class='category_con'>"+ $(this).val() +"<button class='category_delete'>x</button> </span>");
-				$("#category_area").append(newSpan);
-			}
-		})
-
-		$('input:checkbox[name=CM_DS]').each(function(index){
-			if($(this).is(":checked") === true){
-				let newSpan = $("<span class='category_con'>"+ $(this).val() +"<button class='category_delete'>x</button> </span>");
-				$("#category_area").append(newSpan);
-			}
-		});
-/*
-		$.ajax({
-			type : "post",
-			url : "/admin/categoryUpdate",
-			data : {
-
-			}
-		});*/
-
-		$("#popup_layer").css("display","none");
-
-	}
-
-	//팝업 띄우기
-	function openPop() {
-		document.getElementById("popup_layer").style.display = "block";
-	}
-
-	//팝업 닫기
-	function closePop() {
-		document.getElementById("popup_layer").style.display = "none";
-	}
-</script>
