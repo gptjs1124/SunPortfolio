@@ -4,7 +4,10 @@
 <%@ page session="false"%>
 
 <jsp:include page="../../inc/header.jsp" />
+<link rel="stylesheet" href="/resources/css/popup.css">
+<link rel="stylesheet" href="/resources/css/sub.css">
 <script type="text/javascript" src="/resources/js/contact/write.js"></script>
+<script type="text/javascript" src="/resources/js/popupContactMenu.js"></script>
 <article id="Aboutus" class="sub_cont">
 	<div class="inner1400">
 
@@ -28,14 +31,13 @@
 						<tr>
 							<th colspan="1">카테고리</th>
 							<td colspan="3">
-								<select id="category" name="category">
-									<option id="one">:::: 문의사항을 선택해주세요 ::::</option>
-									<option value="홈페이지">홈페이지</option>
-									<option value="상세페이지">상세페이지</option>
-									<option value="서브페이지">서브페이지</option>
-									<option value="팝업 및 메인슬라이드">팝업 및 메인슬라이드</option>
-									<option value="기타">기타</option>
-								</select>
+								<div id="category_area">
+									<c:forEach var="chooseMenu" items="${chooseMenuList}">
+										<span class="category_con" data-categprymenuseq="${chooseMenu.categprymenuseq}" data-cmnscd="${chooseMenu.cmns_cd}">${chooseMenu.cmns_cd_nm}<button class="category_delete">x</button> </span>
+									</c:forEach>
+
+								</div>
+								<a href="javascript:openPop()" id="catagorySelect">선택</a>
 							</td>
 						</tr>
 						<tr>
@@ -99,6 +101,26 @@
 			</form>
 		</div>
 	</div>
-	
 </article>
+
+<!-- 레이어팝업 -->
+<div class="popup_layer" id="popup_layer" style="display: none;">
+	<div class="popup_box">
+		<div class="popup_X">
+			<a href="javascript:closePop();">X</a>
+		</div>
+
+		<!--팝업 컨텐츠 영역-->
+		<div class="popup_cont" id="popup_cont">
+			<h3 class="popupTitle"></h3>
+		</div>
+
+		<!--팝업 버튼 영역-->
+		<div class="popup_btn">
+			<a onclick="sendPop()">선택</a>
+		</div>
+	</div>
+</div>
+
+
 <jsp:include page="../../inc/fotter.jsp" />

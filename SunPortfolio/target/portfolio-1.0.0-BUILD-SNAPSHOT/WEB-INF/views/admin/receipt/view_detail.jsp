@@ -6,8 +6,8 @@
 <link rel="stylesheet" href="/resources/css/popup.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="/resources/js/admin/receipt.js"></script>
-<script src="/resources/js/code.js"></script>
-<script src="/resources/js/getContactMenu.js"></script>
+<script src="/resources/js/popupContactMenu.js"></script>
+<script src="/resources/js/admin/popupAdminContactMenu.js"></script>
 
 <div class="container adminContact">
 	<ul class="tabs">
@@ -31,7 +31,7 @@
 							<tr>
 								<th colspan="1">카테고리</th>
 								<td colspan="3">
-									<input type="text" id="seq" name ="seq" value="${con.seq}">
+									<input type="hidden" id="seq" name ="seq" value="${con.seq}">
 									<%--<input type="text" id="category" name="category" value="${con.category}">--%>
 									<div id="category_area">
 										<c:forEach var="chooseMenu" items="${chooseMenuList}">
@@ -99,21 +99,20 @@
 	
 	<!-- 레이어팝업 -->
 	<div class="popup_layer" id="popup_layer" style="display: none;">
-	  <div class="popup_box">
-		  <div style="height: 10px; width: 375px;">
-			<a href="javascript:closePop();">X</a>
-		  </div>
+		<div class="popup_box">
+			<div class="popup_X">
+				<a href="javascript:closePop();">X</a>
+			</div>
 
-		  <!--팝업 컨텐츠 영역-->
-		  <div class="popup_cont" id="popup_cont">
-			  <h5>카테고리 수정</h5>
-		  </div>
+			<!--팝업 컨텐츠 영역-->
+			<div class="popup_cont" id="popup_cont">
+				<h3 class="popupTitle"></h3>
+			</div>
 
-		  <button onclick="sendPop()">제출</button>
-		  <!--팝업 버튼 영역-->
-		  <div class="popup_btn" style="margin-top: 20px;">
-			  <a href="javascript:closePop();">닫기</a>
-		  </div>
-	  </div>
+			<!--팝업 버튼 영역-->
+			<div class="popup_btn">
+				<a onclick="sendPop()">제출</a>
+			</div>
+		</div>
 	</div>
 </div>
