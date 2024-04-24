@@ -31,12 +31,7 @@
 						<tr>
 							<th colspan="1">카테고리</th>
 							<td colspan="3">
-								<div id="category_area">
-									<c:forEach var="chooseMenu" items="${chooseMenuList}">
-										<span class="category_con" data-categprymenuseq="${chooseMenu.categprymenuseq}" data-cmnscd="${chooseMenu.cmns_cd}">${chooseMenu.cmns_cd_nm}<button class="category_delete">x</button> </span>
-									</c:forEach>
-
-								</div>
+								<div id="category_area"></div>
 								<a href="javascript:openPop()" id="catagorySelect">선택</a>
 							</td>
 						</tr>

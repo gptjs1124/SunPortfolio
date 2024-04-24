@@ -13,7 +13,25 @@ function closePop() {
 	document.getElementById("popup_layer").style.display = "none";
 }
 
+function sendPop() {
+	$('input:checked').each(function(){
+		let cmndCd = $(this).val();
+		let text = $(this).next().html();
+		let htmlCode = `<span class="category_con" data-cmnscd="${cmndCd}">${text}`
+			htmlCode += "<button class='selectCategoryDel'>x</button>"
+			htmlCode += "</span>";
+		$('#category_area').append(htmlCode);
+	});
+
+	closePop();
+}
+
 $(document).ready(function() {
+
+	$('.selectCategoryDel').on("click", function(){
+		$(this).parent().remove();
+	});
+
 	$('.popupTitle').text("카테고리");
 
 	$.ajax({

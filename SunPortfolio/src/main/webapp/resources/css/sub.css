@@ -201,7 +201,7 @@ transform:translateX(0);
 .contact .tit_au_c:before{ content:""; width:4px; height:4px; background:#ffea00; border-radius:50%; display:inline-block; vertical-align: middle; margin-right:20px;}
 .contact .send input{padding:20px 0; width:200px; border-radius:5px; background:#333; border:none; font-size:18px; color:#fff; cursor:pointer; -webkit-transition:.4s; -moz-transition:.4s; -ms-transition:.4s; -o-transition:.4s; transition:.4s;}
 .contact .send input:hover{background:#ffea00; color:#000;}
-#catagorySelect{display: inline-block; word-break:break-all; vertical-align: top; margin-left: 20px; padding:12px 0; width:50px; text-align: center; border-radius:5px; background:#333; border:none; font-size:18px; color:#fff; cursor:pointer; -webkit-transition:.4s; -moz-transition:.4s; -ms-transition:.4s; -o-transition:.4s; transition:.4s;}
+#catagorySelect{display: inline-block; word-break:break-all; vertical-align: top; margin-left: 20px; padding:13px 0; width:50px; text-align: center; border-radius:5px; background:#333; border:none; font-size: 14px; color:#fff; cursor:pointer; -webkit-transition:.4s; -moz-transition:.4s; -ms-transition:.4s; -o-transition:.4s; transition:.4s;}
 #catagorySelect:hover{background:#ffea00; color:#000;}
 
 /* contact */
