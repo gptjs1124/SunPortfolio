@@ -32,7 +32,7 @@
 							<th colspan="1">카테고리</th>
 							<td colspan="3">
 								<div id="category_area"></div>
-								<a href="javascript:openPop()" id="catagorySelect">선택</a>
+								<a href="javascript:openPop()" id="catagorySelect" >선택</a>
 							</td>
 						</tr>
 						<tr>

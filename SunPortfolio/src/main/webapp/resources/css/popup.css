@@ -69,11 +69,13 @@ ul.tabs li.current{
 .category_con{
     display: inline-block; background: #555;  border: none;  padding: 10px; margin:5px 5px 0 5px;  border-radius: 5px;  color: #fff;}
 .category_delete{
-    display: inline-block; margin-left:5px; background: none; border:none;
+    display: inline-block; margin-left:5px; background: none; border:none; padding:0;
 }
 .category_delete:hover{background: none; border:none;}
 
 .category_checkbox{width:50%; display: inline-block;}
+.selectCategoryDel{margin-left: 5px; background: none; border: none; color: #fff;}
+
 
 
 

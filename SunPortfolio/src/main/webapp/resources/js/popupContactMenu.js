@@ -1,3 +1,4 @@
+
 function openPop() {
 	document.getElementById("popup_layer").style.display = "block";
 
@@ -18,7 +19,7 @@ function sendPop() {
 		let cmndCd = $(this).val();
 		let text = $(this).next().html();
 		let htmlCode = `<span class="category_con" data-cmnscd="${cmndCd}">${text}`
-			htmlCode += "<button class='selectCategoryDel'>x</button>"
+			htmlCode += "<button type='button' class='selectCategoryDel'>x</button>"
 			htmlCode += "</span>";
 		$('#category_area').append(htmlCode);
 	});
@@ -27,8 +28,10 @@ function sendPop() {
 }
 
 $(document).ready(function() {
-
-	$('.selectCategoryDel').on("click", function(){
+	alert("들어오긴하나?");
+	/* 카테고리 X버튼 클릭 시  */
+	$('.selectCategoryDel').on("click", function(event){
+		event.preventDefault(); //기본동작 막기
 		$(this).parent().remove();
 	});
 
