@@ -37,7 +37,7 @@
 						</tr>
 						<tr>
 							<th colspan="1">제목</th>
-							<td colspan="3">
+						<td colspan="3">
 								<input type="text" name="title" id="title" style="width:100%;">
 							</td>
 						</tr>

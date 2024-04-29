@@ -65,7 +65,7 @@
 
 	<!-- 공통코드 불러오기 :: 카테고리 메뉴 -->
 	<select id="codeGroupSelect" resultType="sun.spring.dto.CodeGroup">
-		SELECT * FROM common_code WHERE CMNS_CD_GROUP_ID = #{cmns_cd_group_id}  AND UP_CMNS_CD IS null
+		SELECT * FROM common_code WHERE CMNS_CD_GROUP_ID = #{cmns_cd_group_id}  AND UP_CMNS_CD IS null ORDER BY 2
 	</select>
 
 	<!-- 공통코드 불러오기 :: 카테고리 상세 메뉴 -->
@@ -101,7 +101,7 @@
 
 	<!-- CATEGORYMENU insert를 하기 위한 sql -->
 	<select id="insertWithCodeSelect" resultType="sun.spring.dto.CodeGroup">
-		SELECT * FROM common_code WHERE CMNS_CD = #{cmns_cd}
+		SELECT * FROM common_code WHERE CMNS_CD = #{cmns_cd} order by 2
 	</select>
 
 	<insert id="insertChooseMenu">
