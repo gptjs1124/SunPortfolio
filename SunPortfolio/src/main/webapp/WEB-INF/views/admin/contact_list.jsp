@@ -28,6 +28,8 @@
 								<option value="접수" <c:if test="${no.contact eq '접수'}">selected</c:if>>접수</option>
 								<option value="진행" <c:if test="${no.contact eq '진행'}">selected</c:if>>진행</option>
 								<option value="완료" <c:if test="${no.contact eq '완료'}">selected</c:if>>완료</option>
+								<option value="대기" <c:if test="${no.contact eq '대기'}">selected</c:if>>대기</option>
+								<option value="삭제" <c:if test="${no.contact eq '삭제'}">selected</c:if>>삭제</option>
 							</select>
 						</td>
 					</tr>

@@ -159,6 +159,7 @@ public class AdminService {
 	}
 
 	//@Transactional
+	@Transactional("txManager")
 	public List<CodeGroup> deleteInsertChooseMenu(List<CodeGroup> codeGroupList) throws Exception{
 		//seq 기준 삭제
 		int updateResult = 0;

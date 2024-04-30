@@ -1,7 +1,9 @@
 package sun.spring.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import sun.spring.dto.CodeGroup;
 import sun.spring.dto.ContactDTO;
 import sun.spring.dto.FileDTO;
 import sun.spring.service.ContactService;
@@ -34,7 +37,7 @@ public class ContactController {
 	}	
 	
 	@RequestMapping("writeProc")
-	public String writeProc(ContactDTO conDTO, FileDTO fDTO, Model model) throws Exception{
+	public String writeProc(ContactDTO conDTO, FileDTO fDTO, String[] categoryArr, Model model) throws Exception{
 		conDTO.setTel(conDTO.getSelTel() +" - "+ conDTO.getPhone01() +" - "+ conDTO.getPhone02());
 		conDTO.setTel(conDTO.getSelTel() +" - "+ conDTO.getPhone01() +" - "+ conDTO.getPhone02());
 		
@@ -47,7 +50,7 @@ public class ContactController {
 		ftnDTO = fcon.fileOneInsert(conDTO, fDTO, realPath);
 		
 		//오라클 DB에 저장
-		int result = cservice.conInsert(conDTO, ftnDTO);
+		int result = cservice.conInsert(conDTO, ftnDTO, categoryArr);
 		model.addAttribute("result", result);
 		
 		}catch(Exception ex) {

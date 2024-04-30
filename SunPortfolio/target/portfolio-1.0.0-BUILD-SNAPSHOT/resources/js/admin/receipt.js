@@ -2,28 +2,6 @@
  * 접수 상세페이지 
  */
 $(document).ready(function(){
-
-	/*
-	//컨텐트 높이값 변동 되게 가져옴.
-	var tabHeight = $('#outerheight').outerHeight(true);
-	//parent.heightChange(tabHeight);
-	
-	//탭변경에 따른 컨텐트 높이값 변동 되게 가져옴.
-	$('ul.tabs li').click(function(){
-		var tab_id = $(this).attr('data-tab');
-
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current');
-		
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-		
-		//컨텐트 높이값 변동 되게 가져옴.
-		var tabHeight = $('#outerheight').outerHeight(true); 
-		parent.heightChange(tabHeight);
-	});
-	 */
-
 	
 	$(".modifyShowBtn").css("display", "none");
 	$(".modifyHiddenBtn").css("diplay","inline-block");

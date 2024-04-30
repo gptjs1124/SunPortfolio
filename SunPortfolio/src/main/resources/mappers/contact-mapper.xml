@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="contact">
-	<insert id="insert">
-		insert into sunportfolio values(sunportfolio_seq.nextval, #{category}, #{title}, #{company}, #{grade}, #{name}, #{tel}, #{content}, sysdate, #{boardck}, #{filename}, #{contact}, #{fileVolume, jdbcType=BLOB})
+	<insert id="insert" parameterType="sun.spring.dto.ContactDTO">
+		<selectKey keyProperty="seq" order="BEFORE" resultType="int">
+			SELECT sunportfolio_seq.nextval from dual
+		</selectKey>
+
+		INSERT
+			INTO
+			sunportfolio (
+				SEQ,
+				TITLE,
+				COMPANY,
+				GRADE,
+				NAME,
+				TEL,
+				CONTENT,
+				CON_DATE,
+				BOARDCK,
+				FILENAME,
+				CONTACT,
+				FILEVOLUME
+			)VALUES(
+				#{seq},
+				#{title},
+				#{company},
+				#{grade},
+				#{name},
+				#{tel},
+				#{content},
+				sysdate,
+				#{boardck},
+				#{filename},
+				#{contact},
+				#{fileVolume, jdbcType = BLOB}
+		)
 	</insert>
 	
 	<insert id ="insert_File">

@@ -17,7 +17,8 @@ public class ContactDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public int conInsert(ContactDTO conDTO) throws Exception{
-		return mybatis.insert("contact.insert",conDTO);
+		mybatis.insert("contact.insert",conDTO);
+		return conDTO.getSeq(); //채번된 seq
 	}
 	
 	public List<ContactDTO> conselect() throws Exception{

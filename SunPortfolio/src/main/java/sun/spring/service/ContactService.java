@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import sun.spring.controller.ContactController;
+import sun.spring.dao.AdminDAO;
 import sun.spring.dao.ContactDAO;
+import sun.spring.dto.CodeGroup;
 import sun.spring.dto.ContactDTO;
 import sun.spring.dto.FileDTO;
 
@@ -17,28 +19,58 @@ public class ContactService {
 	
 	@Autowired
 	ContactDAO cdao = new ContactDAO();
-	
+
+	@Autowired
+	AdminDAO adao = new AdminDAO();
+
 	@Autowired
 	ContactController ccont = new ContactController();
 	
 	@Transactional("txManager")
-	public int conInsert(ContactDTO conDTO, FileDTO fDTO) throws Exception{
+	public int conInsert(ContactDTO conDTO, FileDTO fDTO, String[] categoryArr) throws Exception{
 		conDTO.setFilename(fDTO.getSysname());
 		conDTO.setContact("접수");	
 				
 		//insert 진행
-		int num = cdao.conInsert(conDTO);
+		int seqKey = cdao.conInsert(conDTO);
+		System.out.println(conDTO.getSeq());
+
+		/* 카테고리 insert 진행 */
+		//자료형 List로 변경
+		List<CodeGroup> listCodeGroup = new ArrayList<CodeGroup>();
+		for( int i = 0; i < categoryArr.length; i++){
+			CodeGroup codeGroup = new CodeGroup();
+			String cmns_cd = categoryArr[i];
+			codeGroup.setCmns_cd(cmns_cd);
+			codeGroup.setSeq(seqKey); //insert한 key값 가져오기
+			listCodeGroup.add(codeGroup);
+		}
+
+		int insertResult = 0;
+		for( CodeGroup codeGroup : listCodeGroup){
+			int cunt = 0;
+			CodeGroup selectMenu = adao.insertWithCodeSelect(codeGroup);
+			selectMenu.setSeq(seqKey);
+			cunt = adao.insertChooseMenu(selectMenu);
+			if(cunt > 0){
+				insertResult++;
+			}
+		}
+
+		if(insertResult != listCodeGroup.size()){
+			throw new Exception("저장할때 애러가 발생했습니다.");
+		}
 		
 		//첨부파일 오라클DB 저장		
 		int numFile = cdao.conFileInsert(fDTO);
 		
-		if(num == 1 && numFile == 1) {
+		if(seqKey > 0 && numFile == 1 && categoryArr.length == insertResult) {
 			System.out.println("성공");
 		}else {
 			System.out.println("실패");
 		}
 		
-		return num;
+		return seqKey;
 	}
 	
 	/*게시판 네비게이션*/

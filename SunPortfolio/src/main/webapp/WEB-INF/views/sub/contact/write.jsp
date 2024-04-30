@@ -31,6 +31,7 @@
 						<tr>
 							<th colspan="1">카테고리</th>
 							<td colspan="3">
+								<input type="hidden" id="categoryArr" name="categoryArr">
 								<div id="category_area"></div>
 								<a href="javascript:openPop()" id="catagorySelect" >선택</a>
 							</td>
