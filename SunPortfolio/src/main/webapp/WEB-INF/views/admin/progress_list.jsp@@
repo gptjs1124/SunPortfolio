@@ -35,7 +35,7 @@
 									<c:if test="${num.count >= 1}">
 										<tr>
 											<td><input type="checkbox" name="ck" class="ck"></td>
-											<td>${no.rnum}</td>
+											<td>${no.rownum}</td>
 											<td><a href="/admin/viewProc?seq=${no.seq}">${no.title}</a></td>
 											<td><span class="target">${no.content}</span></td>
 											<td>${no.dateWrite}</td>

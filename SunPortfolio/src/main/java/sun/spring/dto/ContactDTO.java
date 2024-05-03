@@ -7,7 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ContactDTO {
 	private int seq;
-	private int rnum;
+	private int rownum;
+	//private int rnum;
 	private String category;
 	private String title;
 	private String company;
@@ -27,39 +28,15 @@ public class ContactDTO {
 	private String selTel;
 	private String phone01;
 	private String phone02;
+
+	//codeGroup
+	private int contactstepseq;
+	private String cmns_cd;
+	private String cmns_cd_nm;
 	
 	public ContactDTO() {
 		super();
 	}
-
-	public ContactDTO(int seq, int rnum, String category, String title, String company, String grade, String name,
-			String tel, String content, Timestamp con_date, String dateWrite, String boardck, MultipartFile file,
-			String filename, byte[] fileVolume, String contact, StringBuilder sb, String selTel, String phone01,
-			String phone02) {
-		super();
-		this.seq = seq;
-		this.rnum = rnum;
-		this.category = category;
-		this.title = title;
-		this.company = company;
-		this.grade = grade;
-		this.name = name;
-		this.tel = tel;
-		this.content = content;
-		this.con_date = con_date;
-		this.dateWrite = dateWrite;
-		this.boardck = boardck;
-		this.file = file;
-		this.filename = filename;
-		this.fileVolume = fileVolume;
-		this.contact = contact;
-		this.sb = sb;
-		this.selTel = selTel;
-		this.phone01 = phone01;
-		this.phone02 = phone02;
-	}
-
-
 
 	public int getSeq() {
 		return seq;
@@ -69,12 +46,12 @@ public class ContactDTO {
 		this.seq = seq;
 	}
 
-	public int getRnum() {
-		return rnum;
+	public int getRownum() {
+		return rownum;
 	}
 
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
 	}
 
 	public String getCategory() {
@@ -233,5 +210,29 @@ public class ContactDTO {
 
 	public void setPhone02(String phone02) {
 		this.phone02 = phone02;
+	}
+
+	public int getContactstepseq() {
+		return contactstepseq;
+	}
+
+	public void setContactstepseq(int contactstepseq) {
+		this.contactstepseq = contactstepseq;
+	}
+
+	public String getCmns_cd() {
+		return cmns_cd;
+	}
+
+	public void setCmns_cd(String cmns_cd) {
+		this.cmns_cd = cmns_cd;
+	}
+
+	public String getCmns_cd_nm() {
+		return cmns_cd_nm;
+	}
+
+	public void setCmns_cd_nm(String cmns_cd_nm) {
+		this.cmns_cd_nm = cmns_cd_nm;
 	}
 }

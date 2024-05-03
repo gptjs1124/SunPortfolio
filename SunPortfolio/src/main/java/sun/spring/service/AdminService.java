@@ -25,11 +25,11 @@ public class AdminService {
 	}
 	
 	/* 게시물 10개씩 출력 */
-	public List<ContactDTO> count10(int cpage, ContactDTO cdto) throws Exception{
+	public List<ContactDTO> count10(int cpage, CodeGroup codeGroup) throws Exception{
 		int innerBoradCount = 10; // 한 페이징 안에 들어가는 게시글 갯수
 		int start = 0; //시작 값
 		int end = 0;//마지막 값
-		String contact = cdto.getContact();
+		String cmnsCdNm = codeGroup.getCmns_cd_nm();
 		
 		//총 게시물 갯수
 		int allCount = adao.allBoardCount();
@@ -68,7 +68,7 @@ public class AdminService {
 			sd.append("<a href = '/sub/contact/adminContactListProc?cpage="+(endNav+1)+"'> > </a>");
 		}
 		
-		return adao.boardCount10(start, end, sd, contact);
+		return adao.boardCount10(start, end, sd, cmnsCdNm);
 	}
 	
 	/**/
@@ -134,11 +134,6 @@ public class AdminService {
 	public int commentUpdate(CommentDTO commentDTO) throws Exception{
 		return adao.commentUpdate(commentDTO);
 	}
-	
-	/**/
-	public int selectBoxVal(ContactDTO con) throws Exception{
-		return adao.selectBoxVal(con);
-	}
 
 	public List<CodeGroup> codeGroupSelect(CodeGroup codeGroup) throws Exception{
 		List<CodeGroup> codeGroupSelectData = adao.codeGroupSelect(codeGroup);
@@ -194,4 +189,27 @@ public class AdminService {
 
 		return insertMenu;
 	}
+
+	public List<CodeGroup> commonCodeSelect(CodeGroup codeGroup) throws Exception{
+		return adao.commonCodeSelect(codeGroup);
+	}
+
+	public List<CodeGroup> callStep(CodeGroup codeGroup) throws Exception{
+		return adao.callStep(codeGroup);
+	}
+
+	/**/
+	public int updateStep(CodeGroup codeGroup) throws Exception{
+		CodeGroup codeGroup2 = adao.commonCodeNmSelect(codeGroup);
+		codeGroup.setCmns_cd(codeGroup2.getCmns_cd());
+		codeGroup.setCmns_cd_nm(codeGroup2.getCmns_cd_nm());
+		codeGroup.setLast_mdfr_id("admin");
+		codeGroup.setCmns_cd_group_id(codeGroup2.getCmns_cd_group_id());
+		codeGroup.setUp_cmns_cd(codeGroup2.getUp_cmns_cd());
+		codeGroup.setUp_cmns_cd_group_id(codeGroup2.getUp_cmns_cd_group_id());
+		adao.updateStep(codeGroup);
+
+		return 0;
+	}
+
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="contact">
 	<insert id="insert" parameterType="sun.spring.dto.ContactDTO">
 		<selectKey keyProperty="seq" order="BEFORE" resultType="int">
@@ -18,8 +19,9 @@
 				CONTENT,
 				CON_DATE,
 				BOARDCK,
-				FILENAME,
-				CONTACT,
+			    <if test="filename!=null">
+					FILENAME,
+			    </if>
 				FILEVOLUME
 			)VALUES(
 				#{seq},
@@ -31,8 +33,9 @@
 				#{content},
 				sysdate,
 				#{boardck},
-				#{filename},
-				#{contact},
+				<if test="filename!=null">
+					#{filename},
+				</if>
 				#{fileVolume, jdbcType = BLOB}
 		)
 	</insert>
@@ -52,10 +55,10 @@
 	
 	<select id="boardCount10" parameterType="hashMap" resultType="sun.spring.dto.ContactDTO">
 		select * from (
-		    select rownum as rnum, sun.* from(
+		    select rownum , sun.* from(
 		        select seq, title, name, content, con_date from sunportfolio order by con_date desc
 		    ) sun
-		) where rnum between ${start} and ${end}
+		) where rownum between ${start} and ${end}
 	</select>
 	
 	<select id="conview" resultType="sun.spring.dto.ContactDTO">
@@ -77,5 +80,4 @@
 	<select id="mathRandom" resultType="sun.spring.dto.ContactDTO">
 		select * from sunportfolio
 	</select>
-	
 </mapper>

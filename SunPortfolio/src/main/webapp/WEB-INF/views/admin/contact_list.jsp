@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="false"%>
 
@@ -44,17 +44,21 @@
 
 		<div class="admin_tit_s1">
 			<dl>
-				<dt id="tab_title">${cdto.contact}</dt>
+				<c:forEach var="no" items="${allBoardCount}" varStatus="num">
+					<c:if test="${num.count == 1}">
+						<dt id="tab_title">${no.cmns_cd_nm}</dt>
+					</c:if>
+				</c:forEach>
 				<dd>
 					<ul>
 						<li>
-							<a href="/admin/ContactListProc?cpage=1&contact=접수">접수</a>
+							<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=접수">접수</a>
 						</li>
 						<li>
-							<a href="/admin/ContactListProc?cpage=1&contact=진행">진행</a>
+							<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=진행">진행</a>
 						</li>
 						<li>
-							<a href="/admin/ContactListProc?cpage=1&contact=완료">완료</a>
+							<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=완료">완료</a>
 						</li>
 					</ul>
 				</dd>
@@ -85,7 +89,7 @@
 												<input type="checkbox" name="ck" class="ck">
 												<input type="hidden" name="allBoardCount" id="allBoardCount" value="${num.count}" >
 											</td>
-											<td>${no.rnum}</td>
+											<td>${no.rownum}</td>
 											<td>
 												<a href="/admin/viewProc?seq=${no.seq}">${no.title}</a>
 											</td>
@@ -93,10 +97,11 @@
 											<td>${no.dateWrite}</td>
 											<td>
 												<input type="hidden" name="seq" id="seq_${no.seq}" value="${no.seq}" >
+												<input type="hidden" name="contactstepseq" id="contactstepseq_${no.contactstepseq}" value="${no.contactstepseq}" >
 												<select class="StepIng" name="StepIng">
-													<option value="접수" <c:if test="${no.contact eq '접수'}">selected</c:if>>접수</option>
-													<option value="진행" <c:if test="${no.contact eq '진행'}">selected</c:if>>진행</option>
-													<option value="완료" <c:if test="${no.contact eq '완료'}">selected</c:if>>완료</option>
+													<c:forEach var ="step" items="${stepCommenCode}">
+														<option value="${step.cmns_cd}" <c:if test="${step.cmns_cd_nm eq no.cmns_cd_nm}">selected</c:if>>${step.cmns_cd_nm}</option>
+													</c:forEach>
 												</select>
 											</td>
 										</tr>

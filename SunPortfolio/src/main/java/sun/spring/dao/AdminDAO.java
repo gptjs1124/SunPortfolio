@@ -33,11 +33,11 @@ public class AdminDAO {
 	}
 	
 	/* 게시물 10개씩 출력 */
-	public List<ContactDTO> boardCount10(int start, int end, StringBuilder sd, String contact) throws Exception{
+	public List<ContactDTO> boardCount10(int start, int end, StringBuilder sd, String cmnsCdNm) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("contact", contact);
+		map.put("cmns_cd_nm", cmnsCdNm);
 		List<ContactDTO> result = mybatis.selectList("admin.boardCount10", map);
 		if(!result.isEmpty()) {
 			result.get(0).setSb(sd);
@@ -115,10 +115,6 @@ public class AdminDAO {
 	public int commentUpdate(CommentDTO commentDTO) throws Exception{
 		return mybatis.delete("commentUpdate", commentDTO);
 	}
-	
-	public int selectBoxVal(ContactDTO con) throws Exception{
-		return mybatis.update("contactChange",con);
-	}
 
 	public List<CodeGroup> codeGroupSelect(CodeGroup codeGroup) throws Exception{
 		return mybatis.selectList("codeGroupSelect", codeGroup);
@@ -147,6 +143,22 @@ public class AdminDAO {
 
 	public CodeGroup insertWithCodeSelect(CodeGroup codeGroup) throws Exception{
 		return mybatis.selectOne("insertWithCodeSelect", codeGroup);
+	}
+
+	public List<CodeGroup> commonCodeSelect(CodeGroup codeGroup) throws Exception{
+		return mybatis.selectList("commonCodeSelect", codeGroup);
+	}
+
+	public List<CodeGroup> callStep(CodeGroup codeGroup) throws Exception{
+		return mybatis.selectList("callStep", codeGroup);
+	}
+
+	public CodeGroup commonCodeNmSelect(CodeGroup codeGroup) throws Exception{
+		return mybatis.selectOne("commonCodeNmSelect", codeGroup);
+	}
+
+	public int updateStep(CodeGroup codeGroup) throws Exception{
+		return mybatis.update("updateStep",codeGroup);
 	}
 
 }

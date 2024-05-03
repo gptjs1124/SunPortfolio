@@ -23,17 +23,17 @@
 				Contact
 				<ul id="contactUl">
 					<li>
-						<a href="/admin/ContactListProc?cpage=1&contact=접수">
+						<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=접수">
 							-&nbsp;&nbsp;접수
 						</a>
 					</li>
 					<li>
-						<a href="/admin/ContactListProc?cpage=1&contact=진행">
+						<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=진행">
 							-&nbsp;&nbsp;진행
 						</a>
 					</li>
 					<li>
-						<a href="/admin/ContactListProc?cpage=1&contact=완료">
+						<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=완료">
 							-&nbsp;&nbsp;완료
 						</a>
 					</li>

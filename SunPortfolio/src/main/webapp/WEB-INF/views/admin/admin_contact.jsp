@@ -30,7 +30,7 @@
 								<c:forEach var="no" items="${allBoardCount}" varStatus="num">
 									<c:if test="${num.count >= 1}">
 										<tr>
-											<td>${no.rnum}</td>
+											<td>${no.rownum}</td>
 											<td><a href="/sub/contact/viewProc?seq=${no.seq}">${no.title}</a></td>
 											<td><sapn class="target">${no.content}</sapn></td>
 											<td>${no.dateWrite}</td>

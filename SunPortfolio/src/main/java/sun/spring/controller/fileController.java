@@ -35,8 +35,9 @@ public class fileController {
 	
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public FileDTO fileOneInsert(ContactDTO conDTO, FileDTO fDTO, String realPath) throws Exception {
-		MultipartFile file = conDTO.getFile();		
+	public FileDTO fileOneInsert(ContactDTO conDTO, String realPath) throws Exception {
+		FileDTO fDTO = new FileDTO();
+		MultipartFile file = conDTO.getFile();
 		File fileRealPath = new File(realPath);
 		
 		if(!fileRealPath.exists())

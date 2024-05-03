@@ -36,7 +36,7 @@
 <script>
 	$(function() {
 		$('#contactList').click(function() {
-			location.href = "../admin/adminContactListProc?cpage=1&contact='접수''";
+			location.href = "../admin/adminContactListProc?cpage=1&cmns_cd_nm=접수";
 		});
 	});
 </script>

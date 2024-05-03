@@ -82,11 +82,17 @@ public class AdminController {
 	
 	/* 접수 :::::::::::::::::::::::::::::::::::::::::::::::::::: */
 	@RequestMapping("ContactListProc")
-	public String listProc(Model model, int cpage, ContactDTO cdto) throws Exception{
+	public String listProc(Model model, int cpage, CodeGroup codeGroup) throws Exception{
 		// 한 페이지당 10개씩 게시물 보이기
-		List<ContactDTO> count10 = aservice.count10(cpage, cdto);
+		List<ContactDTO> count10 = aservice.count10(cpage, codeGroup);
 		model.addAttribute("allBoardCount", count10);
-		model.addAttribute("cdto",cdto);
+		model.addAttribute("cdto",codeGroup);
+
+		//진행단계 조회
+		codeGroup.setCmns_cd_group_id("CODE_STEP"); //공동코드
+		List<CodeGroup> stepCommenCode = aservice.commonCodeSelect(codeGroup);
+		model.addAttribute("stepCommenCode",stepCommenCode);
+
 		return "/admin/contact_list";
 	}
 	
@@ -235,10 +241,9 @@ public class AdminController {
 	}
 	
 	@ResponseBody
-	@RequestMapping("contactChange")
-	public int contactChange(ContactDTO contactDTO) throws Exception{
-		//TODO:: 컨트롤러에서 ‘진행’이라는 글자가 맞는지 확인해야된다. 이유는 …. SQL Select만 할 시는 화면에 value값의 값을 가져와도 괜찮은데, update를 수행 시 저 진행이라는 값을 그대로 DB에 넣기 때문에 문제가 발생한다.
-		int result = aservice.selectBoxVal(contactDTO);
+	@RequestMapping("updateStep")
+	public int updateStep(CodeGroup codeGroup) throws Exception{
+		int result = aservice.updateStep(codeGroup);
 		return 0;
 	}
 
@@ -281,6 +286,12 @@ public class AdminController {
 		}
 
 		return aservice.deleteInsertChooseMenu(codeGroupList);
+	}
+
+	@ResponseBody
+	@RequestMapping("callStep")
+	public List<CodeGroup> callStep(CodeGroup codeGroup) throws Exception{
+		return aservice.callStep(codeGroup);
 	}
 }
 

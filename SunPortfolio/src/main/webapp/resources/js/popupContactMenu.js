@@ -15,12 +15,19 @@ function closePop() {
 }
 
 function sendPop() {
+	let inpuCheck = $('input:checked');
+	if(inpuCheck.length > 0){
+		$('#category_area').text("");
+	}
+
+	//기존에 선택된 항목이 있는지 확인
 	$('input:checked').each(function(){
 		let cmndCd = $(this).val();
 		let text = $(this).next().html();
+
 		let htmlCode = `<span class="category_con" data-cmnscd="${cmndCd}">${text}`
-			htmlCode += "<button type='button' class='selectCategoryDel'>x</button>"
-			htmlCode += "</span>";
+		htmlCode += "<button type='button' class='selectCategoryDel'>x</button>"
+		htmlCode += "</span>";
 		$('#category_area').append(htmlCode);
 	});
 
@@ -28,6 +35,7 @@ function sendPop() {
 }
 
 $(document).ready(function() {
+
 	/* 카테고리 X버튼 클릭 시  */
 	$('.selectCategoryDel').on("click", function(event){
 		event.preventDefault(); //기본동작 막기
@@ -36,6 +44,7 @@ $(document).ready(function() {
 
 	$('.popupTitle').text("카테고리");
 
+	//카테고리 항목 DB에서 들고오기
 	$.ajax({
 			type : "post",
 			url : "/admin/codeGroupSelect",

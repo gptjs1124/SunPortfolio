@@ -40,7 +40,7 @@
 										<c:set var="pageNav" value="${list.pageNav }"/>
 									</c:if>
 									<tr>
-										<td>${list.rnum} <!-- ${cnt.count }--><%-- ${list.seq} --%></td>
+										<td>${list.rownum} <!-- ${cnt.count }--><%-- ${list.seq} --%></td>
 										<td>
 											<a href="/sub/contact/viewProc?seq=${list.seq}" style="color:rgba(255, 255, 255, 0.3);">${list.title}</a>
 										</td>

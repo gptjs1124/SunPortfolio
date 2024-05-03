@@ -37,24 +37,28 @@ public class ContactController {
 	}	
 	
 	@RequestMapping("writeProc")
-	public String writeProc(ContactDTO conDTO, FileDTO fDTO, String[] categoryArr, Model model) throws Exception{
+	public String writeProc(ContactDTO conDTO, String[] categoryArr, Model model) throws Exception{
 		conDTO.setTel(conDTO.getSelTel() +" - "+ conDTO.getPhone01() +" - "+ conDTO.getPhone02());
 		conDTO.setTel(conDTO.getSelTel() +" - "+ conDTO.getPhone01() +" - "+ conDTO.getPhone02());
 		
 		FileDTO ftnDTO = new FileDTO();
-		try {	
-		//첨부파일 로컬에 저장
-		//TODO:: 서버간의 통신으로 이미지가 보이지 않을 것 같은데, 그럼 첨부파일 이미지는 서버로 다운로드 받고 보이게 수정해야됨.
-		//TODO:: 엑셀 다운로드 및 엑셀 업로드 작업하기.
-		String realPath = session.getServletContext().getRealPath("upload/contact/files/");
-		ftnDTO = fcon.fileOneInsert(conDTO, fDTO, realPath);
-		
-		//오라클 DB에 저장
-		int result = cservice.conInsert(conDTO, ftnDTO, categoryArr);
-		model.addAttribute("result", result);
-		
+		try {
+			if(conDTO.getFile().getSize() > 0){
+				//첨부파일 로컬에 저장
+				String realPath = session.getServletContext().getRealPath("upload/contact/files/");
+				ftnDTO = fcon.fileOneInsert(conDTO, realPath);
+
+				//오라클 DB에 저장
+				int result = cservice.conInsert(conDTO, ftnDTO, categoryArr);
+				model.addAttribute("result", result);
+			}else{
+				//오라클 DB에 저장
+				int result = cservice.conInsert(conDTO, ftnDTO, categoryArr);
+				model.addAttribute("result", result);
+			}
 		}catch(Exception ex) {
 			ex.printStackTrace();
+			model.addAttribute("result", ex.getMessage());
 			
 			//저장된 파일 이 있을 경우 삭제
 			File file = new File(ftnDTO.getRealpath());
@@ -72,7 +76,6 @@ public class ContactController {
 		
 		// 한 페이지당 10개씩 게시물 보이기
 		List<ContactDTO> count10 = cservice.count10(cpage);
-//		model.addAttribute("allBoardCount", count10);
 		
 		return link+"list";
 	}

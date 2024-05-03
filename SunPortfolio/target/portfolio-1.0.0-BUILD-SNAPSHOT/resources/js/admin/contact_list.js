@@ -16,7 +16,6 @@ $(function(){
 		}
 	}
 	
-	
 	$('#progress').change(function(){
 		var progress = $("#progress option:selected").val();
 		
@@ -33,15 +32,17 @@ $(function(){
 	});
 	
 	$('.StepIng').change(function(){
-		var selectBoxVal1 = $(".StepIng option:selected").val();
-		var seqNm = $(this).prev().val();
+		let cmnsCd = $(this).val();
+		let contactstepseq = $(this).prev().val();
+		let seq = $(this).prev().prev().val();
 
 		$.ajax({
 			type : "post",
-			url : "/admin/contactChange",
+			url : "/admin/updateStep",
 			data : {
-				'contact' : selectBoxVal1,
-				'seq' : seqNm
+				'cmns_cd' : cmnsCd,
+				'seq' : seq,
+				'contactstepseq' : contactstepseq
 			}
 		}).done(function(resp){
 			alert("진행상태가 변경되었습니다.");
@@ -64,11 +65,4 @@ $(function(){
         buttonImage: "button.png", 
         buttonImageOnly: true 
     });
-	
-	
-	
-	
-	
-	
-	
 });

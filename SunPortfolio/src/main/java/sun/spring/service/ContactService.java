@@ -28,9 +28,12 @@ public class ContactService {
 	
 	@Transactional("txManager")
 	public int conInsert(ContactDTO conDTO, FileDTO fDTO, String[] categoryArr) throws Exception{
-		conDTO.setFilename(fDTO.getSysname());
-		conDTO.setContact("접수");	
-				
+
+		conDTO.setContact("접수");
+		if(!(fDTO.getSysname() == null)){
+			conDTO.setFilename(fDTO.getSysname());
+		}
+
 		//insert 진행
 		int seqKey = cdao.conInsert(conDTO);
 		System.out.println(conDTO.getSeq());
@@ -60,16 +63,23 @@ public class ContactService {
 		if(insertResult != listCodeGroup.size()){
 			throw new Exception("저장할때 애러가 발생했습니다.");
 		}
-		
-		//첨부파일 오라클DB 저장		
-		int numFile = cdao.conFileInsert(fDTO);
-		
-		if(seqKey > 0 && numFile == 1 && categoryArr.length == insertResult) {
-			System.out.println("성공");
-		}else {
-			System.out.println("실패");
+
+		//첨부파일 오라클DB 저장
+		if(!(fDTO.getSysname() == null)){
+			int numFile = cdao.conFileInsert(fDTO);
+			if(seqKey > 0 && numFile == 1 && categoryArr.length == insertResult) {
+				System.out.println("성공");
+			}else {
+				System.out.println("실패");
+			}
+		}else{
+			if(seqKey > 0 && categoryArr.length == insertResult) {
+				System.out.println("성공");
+			}else {
+				System.out.println("실패");
+			}
 		}
-		
+
 		return seqKey;
 	}
 	

@@ -22,11 +22,11 @@
 <!-- 		select * from sunportfolio where seq between ${start} and ${end} order by seq desc -->
 		SELECT * FROM (
 		    SELECT 
-		        ROWNUM as rnum, notice.* FROM (
+		        ROWNUM as rownum, notice.* FROM (
 		            select * from sunportfolio a 
 		        order by con_date desc
 		    ) notice
-		) WHERE rnum BETWEEN ${start} AND ${end}
+		) WHERE rownum BETWEEN ${start} AND ${end}
 	</select>
 	
 	<select id="count10" resultType="sun.spring.dto.ContactDTO">

@@ -51,7 +51,7 @@ body{margin:0;}
 #con{margin-left:200px; min-height: 900px; padding:50px;}
 
 /* contact list */
-#StepIng{width:200px; background:#000; color:rgba(255, 255, 255, 0.6); padding:8px;}
+.StepIng{width:200px; background:#000; color:rgba(255, 255, 255, 0.6); padding:8px; text-align: center;}
 .ck{background:#000; border:1px solid #ddd;}
 
 /*contact view*/
@@ -59,7 +59,8 @@ body{margin:0;}
 .adminContact .ab_con{width:100%; font-size:1.4rem; float:right;}
 .adminContact table{width:100%; text-align:center; vertical-align: middle;}
 .adminContact table th{color:#fff; width:200px; font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:16px 0; vertical-align: middle;}
-.adminContact table td{text-align:left; color:rgba(255, 255, 255, 0.3); font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:16px 0;}
+.adminContact table th:nth-child(1){width:100px;}
+.adminContact table td{text-align:center; color:rgba(255, 255, 255, 0.3); font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:16px 0;}
 .adminContact table td img{width:250px;}
 .adminContact table a{color:rgba(255, 255, 255, 0.3);}
 .adminContact #selTel{width:20%; background:#333; color:#fff; border:none; padding: 10px; border-radius:5px;}
