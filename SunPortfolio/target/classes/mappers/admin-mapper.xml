@@ -78,6 +78,7 @@
 			sunportfolio t1
 				INNER JOIN contactStep t2 ON t1.SEQ = t2.SEQ
 		WHERE
+		<if test="cmns_cd_nm != null">
 			(
 				SELECT
 					cmns_cd
@@ -86,7 +87,9 @@
 				WHERE
 					cmns_cd_nm = #{cmns_cd_nm}
 			) = t2.CMNS_CD
-		  AND ROWNUM BETWEEN ${start} AND ${end}
+		  AND
+		</if>
+		    ROWNUM BETWEEN ${start} AND ${end}
 	</select>
 
 	<!-- 공통코드 불러오기 :: 카테고리 메뉴 -->
@@ -167,33 +170,6 @@
 		SELECT * FROM common_code WHERE UP_CMNS_CD_GROUP_ID = #{cmns_cd_group_id} order by 2
 	</select>
 
-	<!-- CODE_STEP 단계별 조회 select sql -->
-	<select id="callStep" resultType="sun.spring.dto.CodeGroup">
-		SELECT
-			t2.CONTACTSTEPSEQ,
-			t2.SEQ,
-			t2.CMNS_CD_GROUP_ID,
-			t2.CMNS_CD,
-			t2.CMNS_CD_NM,
-			t2.FRST_REG_DT,
-			t2.FRST_RGTR_ID,
-			t2.LAST_MDFCN_DT,
-			t2.LAST_MDFR_ID,
-			t2.UP_CMNS_CD_GROUP_ID,
-			t2.UP_CMNS_CD
-		FROM
-			sunportfolio t1
-				INNER JOIN contactStep t2 ON
-				t1.SEQ = t2.SEQ
-		WHERE
-			(
-				SELECT
-					cmns_cd
-				FROM
-					common_code
-				WHERE
-					cmns_cd_nm = #{cmns_cd_nm}) = t2.CMNS_CD
-	</select>
 
 	<!-- CODE 명을 기준으로 값 불러오기 -->
 	<select id="commonCodeNmSelect" resultType="sun.spring.dto.CodeGroup">

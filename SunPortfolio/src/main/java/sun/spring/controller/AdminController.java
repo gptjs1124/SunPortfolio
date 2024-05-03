@@ -287,12 +287,6 @@ public class AdminController {
 
 		return aservice.deleteInsertChooseMenu(codeGroupList);
 	}
-
-	@ResponseBody
-	@RequestMapping("callStep")
-	public List<CodeGroup> callStep(CodeGroup codeGroup) throws Exception{
-		return aservice.callStep(codeGroup);
-	}
 }
 
 

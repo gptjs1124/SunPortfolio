@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class CodeGroup {
 	private int seq; // 	SUNPORTFOLIO pk
 	private int categprymenuseq;
+	private int contactstepseq;
 	private String cmns_cd_group_id;
 	private String cmns_cd_group_nm;
 	private char use_yn;
@@ -174,5 +175,13 @@ public class CodeGroup {
 
 	public void setUp_cmns_cd(String up_cmns_cd) {
 		this.up_cmns_cd = up_cmns_cd;
+	}
+
+	public int getContactstepseq() {
+		return contactstepseq;
+	}
+
+	public void setContactstepseq(int contactstepseq) {
+		this.contactstepseq = contactstepseq;
 	}
 }

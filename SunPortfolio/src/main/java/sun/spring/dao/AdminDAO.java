@@ -149,10 +149,6 @@ public class AdminDAO {
 		return mybatis.selectList("commonCodeSelect", codeGroup);
 	}
 
-	public List<CodeGroup> callStep(CodeGroup codeGroup) throws Exception{
-		return mybatis.selectList("callStep", codeGroup);
-	}
-
 	public CodeGroup commonCodeNmSelect(CodeGroup codeGroup) throws Exception{
 		return mybatis.selectOne("commonCodeNmSelect", codeGroup);
 	}

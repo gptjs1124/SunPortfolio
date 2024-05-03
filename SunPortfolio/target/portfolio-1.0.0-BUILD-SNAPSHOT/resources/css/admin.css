@@ -110,12 +110,12 @@ body{margin:0;}
 /* admin 타이틀 */
 .admin_tit_s1 {margin-bottom:40px;}
 .admin_tit_s1 dl {color:#fff; line-height:1.4;}
-.admin_tit_s1 dl dt { font-size:4rem; font-weight:700; position:relative; display:inline-block; padding-right:44px; padding-bottom: 16px;}
+.admin_tit_s1 dl dt, #serch_title { font-size:3rem; font-weight:700; position:relative; display:inline-block; padding-right:44px; padding-bottom: 16px; color:#fff;}
 .admin_tit_s1 dl dd {}
 .admin_tit_s1 dl dd span { font-size:2rem; font-weight:100; opacity:0.6; display:block; margin-bottom:10px;}
 .admin_tit_s1 dl dd p {opacity:0.2; font-size:1.5rem; font-weight:100; line-height:1.714em;}
 .admin_tit_s1 ul {overflow:auto;}
-.admin_tit_s1 ul li { border:1px solid #373737; text-align:center; font-size:1.5rem; color:#fff; font-weight:100; opacity:1; width:33.3%; float:left; margin-bottom:20px;}
+.admin_tit_s1 ul li { border:1px solid #373737; text-align:center; font-size:1.5rem; color:#fff; font-weight:100; opacity:1; width:16.6%; float:left; margin-bottom:20px;}
 .admin_tit_s1 ul li a{padding:10px 10px; font-size:1.5rem; font-weight:100; width:100%; display: inline-block; color:#fff;}
 .admin_tit_s1 ul li a:hover{background: #ffea00; color: #000; opacity:1;}
 .admin_tit_s1_text{width:100%; overflow:auto; }

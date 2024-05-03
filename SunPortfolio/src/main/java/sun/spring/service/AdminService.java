@@ -194,10 +194,6 @@ public class AdminService {
 		return adao.commonCodeSelect(codeGroup);
 	}
 
-	public List<CodeGroup> callStep(CodeGroup codeGroup) throws Exception{
-		return adao.callStep(codeGroup);
-	}
-
 	/**/
 	public int updateStep(CodeGroup codeGroup) throws Exception{
 		CodeGroup codeGroup2 = adao.commonCodeNmSelect(codeGroup);

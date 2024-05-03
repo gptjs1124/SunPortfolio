@@ -8,7 +8,7 @@
 	<div class="inner1400">
 		<div class="admin_tit_s1">
 			<form>
-				<div id="tab_title">검색</div>
+				<div id="serch_title">검색</div>
 				<table id="search">
 					<tr>
 						<th>제목</th>
@@ -25,11 +25,16 @@
 						<th>진행단계</th>
 						<td>
 							<select class="StepIng" name="StepIng">
-								<option value="접수" <c:if test="${no.contact eq '접수'}">selected</c:if>>접수</option>
+								<c:forEach var ="step" items="${stepCommenCode}">
+									<li>
+										<option value="${step.cmns_cd_nm}" <c:if test="${no.contact eq step.cmns_cd_nm}">selected</c:if>>${step.cmns_cd_nm}</option>
+									</li>
+								</c:forEach>
+								<%--<option value="접수" <c:if test="${no.contact eq '접수'}">selected</c:if>>접수</option>
 								<option value="진행" <c:if test="${no.contact eq '진행'}">selected</c:if>>진행</option>
 								<option value="완료" <c:if test="${no.contact eq '완료'}">selected</c:if>>완료</option>
 								<option value="대기" <c:if test="${no.contact eq '대기'}">selected</c:if>>대기</option>
-								<option value="삭제" <c:if test="${no.contact eq '삭제'}">selected</c:if>>삭제</option>
+								<option value="삭제" <c:if test="${no.contact eq '삭제'}">selected</c:if>>삭제</option>--%>
 							</select>
 						</td>
 					</tr>
@@ -52,14 +57,14 @@
 				<dd>
 					<ul>
 						<li>
-							<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=접수">접수</a>
+							<a href="/admin/ContactListProc?cpage=1">전체</a>
 						</li>
-						<li>
-							<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=진행">진행</a>
-						</li>
-						<li>
-							<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=완료">완료</a>
-						</li>
+						<!-- 탭메뉴생성 -->
+						<c:forEach var ="step" items="${stepCommenCode}">
+							<li>
+								<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=${step.cmns_cd_nm}">${step.cmns_cd_nm}</a>
+							</li>
+						</c:forEach>
 					</ul>
 				</dd>
 			</dl>
