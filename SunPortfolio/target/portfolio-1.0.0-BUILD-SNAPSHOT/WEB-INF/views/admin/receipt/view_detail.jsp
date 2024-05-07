@@ -32,7 +32,6 @@
 								<th colspan="1">카테고리</th>
 								<td colspan="3">
 									<input type="hidden" id="seq" name ="seq" value="${con.seq}">
-									<%--<input type="text" id="category" name="category" value="${con.category}">--%>
 									<div id="category_area">
 										<c:forEach var="chooseMenu" items="${chooseMenuList}">
 											<span class="category_con" data-categprymenuseq="${chooseMenu.categprymenuseq}" data-cmnscd="${chooseMenu.cmns_cd}">${chooseMenu.cmns_cd_nm}<button class="category_delete">x</button> </span>

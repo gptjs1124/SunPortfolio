@@ -17,25 +17,27 @@
 						<td><input type="text" id="content"></td>
 					</tr>
 					<tr>
-						<th>날씨</th>
+						<th>날짜</th>
 						<td>
 							<input type="text" id="datepicker1">
 							<input type="text" id="datepicker2">
 						</td>
 						<th>진행단계</th>
 						<td>
-							<select class="StepIng" name="StepIng">
-								<c:forEach var ="step" items="${stepCommenCode}">
-									<li>
-										<option value="${step.cmns_cd_nm}" <c:if test="${no.contact eq step.cmns_cd_nm}">selected</c:if>>${step.cmns_cd_nm}</option>
-									</li>
-								</c:forEach>
-								<%--<option value="접수" <c:if test="${no.contact eq '접수'}">selected</c:if>>접수</option>
-								<option value="진행" <c:if test="${no.contact eq '진행'}">selected</c:if>>진행</option>
-								<option value="완료" <c:if test="${no.contact eq '완료'}">selected</c:if>>완료</option>
-								<option value="대기" <c:if test="${no.contact eq '대기'}">selected</c:if>>대기</option>
-								<option value="삭제" <c:if test="${no.contact eq '삭제'}">selected</c:if>>삭제</option>--%>
-							</select>
+							<ul>
+								<select class="StepIng" name="StepIng">
+									<c:forEach var ="step" items="${stepCommenCode}">
+										<li>
+											<option value="${step.cmns_cd_nm}" <c:if test="${no.contact eq step.cmns_cd_nm}">selected</c:if>>${step.cmns_cd_nm}</option>
+										</li>
+									</c:forEach>
+									<%--<option value="접수" <c:if test="${no.contact eq '접수'}">selected</c:if>>접수</option>
+									<option value="진행" <c:if test="${no.contact eq '진행'}">selected</c:if>>진행</option>
+									<option value="완료" <c:if test="${no.contact eq '완료'}">selected</c:if>>완료</option>
+									<option value="대기" <c:if test="${no.contact eq '대기'}">selected</c:if>>대기</option>
+									<option value="삭제" <c:if test="${no.contact eq '삭제'}">selected</c:if>>삭제</option>--%>
+								</select>
+							</ul>
 						</td>
 					</tr>
 					<tr>
@@ -49,11 +51,15 @@
 
 		<div class="admin_tit_s1">
 			<dl>
-				<c:forEach var="no" items="${allBoardCount}" varStatus="num">
-					<c:if test="${num.count == 1}">
-						<dt id="tab_title">${no.cmns_cd_nm}</dt>
-					</c:if>
-				</c:forEach>
+				<c:choose>
+					<c:when test="${empty param.cmns_cd_nm}">
+						<dt id="tab_title">전체</dt>
+					</c:when>
+					<c:otherwise>
+						<dt id="tab_title">${param.cmns_cd_nm}</dt>
+					</c:otherwise>
+				</c:choose>
+
 				<dd>
 					<ul>
 						<li>
@@ -84,7 +90,7 @@
 						
 						<c:choose>
 							<c:when test="${empty allBoardCount}">
-								<tr><td colspan="4">등록된 게시글이 없습니다.</td></tr>
+								<tr><td colspan="6">등록된 게시글이 없습니다.</td></tr>
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="no" items="${allBoardCount}" varStatus="num">
