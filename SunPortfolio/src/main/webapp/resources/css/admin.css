@@ -108,7 +108,7 @@ body{margin:0;}
 #save:hover {border: 1px solid #ddd; padding: 8px; margin-right: 14px; display: inline-block; border: 1px solid #ddd; background: #ededed; margin-top: 20px;float:right; margin-bottom:20px; color:#000;}
 
 /* admin 타이틀 */
-.admin_tit_s1 {margin-bottom:40px;}
+.admin_tit_s1 {margin-bottom:40px; overflow:auto;}
 .admin_tit_s1 dl {color:#fff; line-height:1.4;}
 .admin_tit_s1 dl dt, #serch_title { font-size:3rem; font-weight:700; position:relative; display:inline-block; padding-right:44px; padding-bottom: 16px; color:#fff;}
 .admin_tit_s1 dl dd {}
@@ -128,7 +128,7 @@ body{margin:0;}
 .commentTextModify input{width:100%;}
 
 /* admin < contact < search */
-.admin_tit_s1 #search {width:100%; font-size:1.4rem; float:right; margin-bottom:50px;}
+.admin_tit_s1 #search {width:100%; font-size:1.4rem; float:right;}
 .admin_tit_s1 #search th{color:#fff; width:200px; font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:4px 0; vertical-align: middle;}
 .admin_tit_s1 #search td{text-align:left; color:rgba(255, 255, 255, 0.3); font-weight:200; border-bottom:1px solid #373737; border-top:1px solid #373737; padding:4px 0; vertical-align: middle;}
 .admin_tit_s1 #search a{color:rgba(255, 255, 255, 0.3);}

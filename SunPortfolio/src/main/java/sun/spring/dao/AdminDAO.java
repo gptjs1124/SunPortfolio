@@ -39,9 +39,7 @@ public class AdminDAO {
 		map.put("end", end);
 		map.put("cmns_cd_nm", cmnsCdNm);
 		List<ContactDTO> result = mybatis.selectList("admin.boardCount10", map);
-		if(!result.isEmpty()) {
-			result.get(0).setSb(sd);
-		}
+
 		return result;
 	}
 	
