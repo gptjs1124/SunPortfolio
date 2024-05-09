@@ -80,4 +80,36 @@
 	<select id="mathRandom" resultType="sun.spring.dto.ContactDTO">
 		select * from sunportfolio
 	</select>
+
+	<insert id="stepInsert" parameterType="sun.spring.dto.CodeGroup">
+		INSERT
+		INTO
+			KH.CONTACTSTEP
+		(
+			CONTACTSTEPSEQ,
+			SEQ,
+			CMNS_CD_GROUP_ID,
+			CMNS_CD,
+			CMNS_CD_NM,
+			FRST_REG_DT,
+			FRST_RGTR_ID,
+			LAST_MDFCN_DT,
+			LAST_MDFR_ID,
+			UP_CMNS_CD_GROUP_ID
+		)VALUES(
+		   CONTACTSTEP_SEQ.nextval,
+		   #{seq},
+		   #{cmns_cd_group_id},
+		   #{cmns_cd},
+		   #{cmns_cd_nm},
+		   CURRENT_TIMESTAMP,
+		   #{frst_rgtr_id},
+		   CURRENT_TIMESTAMP,
+		   #{frst_rgtr_id},
+		   #{up_cmns_cd_group_id}
+		)
+	</insert>
+
+
+
 </mapper>

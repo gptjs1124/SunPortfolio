@@ -217,6 +217,7 @@ transform:translateX(0);
 .page{color:rgba(255, 255, 255, 0.3); font-size:16px; text-align:center; margin:50px 0;}
 .page ul li{display:inline-block; padding:0 10px;}
 .page ul li a{color:rgba(255, 255, 255, 0.3); padding:0 10px; margin:0 3px; display:inline-block;}
+.page ul .on a{color:rgba(255, 255, 255, 1); padding:0 10px; margin:0 3px; display:inline-block;}
 
 
 

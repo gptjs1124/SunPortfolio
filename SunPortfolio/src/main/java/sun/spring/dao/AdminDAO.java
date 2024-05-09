@@ -15,32 +15,20 @@ public class AdminDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
-	public List<ContactDTO> conselect() throws Exception{
-		return mybatis.selectList("contact.select");
-	}
-	
 	/* 총 게시글 카운트 */
-	public int allBoardCount() throws Exception{
-		return mybatis.selectOne("contact.allBoardCount");
+	public int allBoardCount(CodeGroup codeGroup) throws Exception{
+		return mybatis.selectOne("admin.allBoardCount", codeGroup);
+		//TODO :: 게시판 Count 세는 것부터 조건문 수정해야하는데, 아래  count10에서 보면  ContactDTO contactDTO 이파라마터 계속 들고 다니잖아 이것도 연결 해야함
 	}
-	
+
 	/* 게시물 10개씩 출력 */
-	public List<ContactDTO> count10() throws Exception{
-//		Map<Integer,Integer> map = new HashMap<Integer,Integer>();
-//		map.put(start, start);
-//		map.put(end, end);
-		return mybatis.selectList("contact.count10");
-	}
-	
-	/* 게시물 10개씩 출력 */
-	public List<ContactDTO> boardCount10(int start, int end, StringBuilder sd, String cmnsCdNm) throws Exception{
+	public List<ContactDTO> count10(int start, int end, String cmnsCdNm, ContactDTO contactDTO) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cmns_cd_nm", cmnsCdNm);
 		map.put("start", start);
 		map.put("end", end);
-		map.put("cmns_cd_nm", cmnsCdNm);
-		List<ContactDTO> result = mybatis.selectList("admin.boardCount10", map);
-
-		return result;
+		map.put("contactDTO", contactDTO);
+		return mybatis.selectList("admin.boardCount10", map);
 	}
 	
 	/**/

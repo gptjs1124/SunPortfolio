@@ -49,6 +49,7 @@ public class ContactService {
 			listCodeGroup.add(codeGroup);
 		}
 
+		//선택한 카테고리 저장 (CATEGORY_MENU)
 		int insertResult = 0;
 		for( CodeGroup codeGroup : listCodeGroup){
 			int cunt = 0;
@@ -59,6 +60,16 @@ public class ContactService {
 				insertResult++;
 			}
 		}
+
+		//진행단계 저장 (CONTACT_STEP)
+		CodeGroup codeGroup = new CodeGroup();
+		codeGroup.setCmns_cd("STEP_01"); //접수
+		CodeGroup selectStep = adao.insertWithCodeSelect(codeGroup);
+		selectStep.setSeq(seqKey); //sunportfolio seq 넣기
+		int stepResult = cdao.stepInsert(selectStep);
+		/*if(stepResult <= 0){
+			throw new Exception("진행단계 저장할 때 애러가 발생했습니다.");
+		}*/
 
 		if(insertResult != listCodeGroup.size()){
 			throw new Exception("저장할때 애러가 발생했습니다.");

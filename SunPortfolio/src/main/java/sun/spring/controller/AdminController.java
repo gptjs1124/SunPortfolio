@@ -82,11 +82,13 @@ public class AdminController {
 	
 	/* 접수 :::::::::::::::::::::::::::::::::::::::::::::::::::: */
 	@RequestMapping("ContactListProc")
-	public String listProc(Model model, int cpage, CodeGroup codeGroup) throws Exception{
-		// 한 페이지당 10개씩 게시물 보이기
-		List<ContactDTO> count10 = aservice.count10(cpage, codeGroup);
-		model.addAttribute("allBoardCount", count10);
-		model.addAttribute("cdto",codeGroup);
+	public String listProc(Model model, int cpage, CodeGroup codeGroup, ContactDTO contactDTO) throws Exception{
+		String pageNavi = aservice.getPageNavi(cpage, codeGroup); //page 네비게이션
+		model.addAttribute("pageNavi", pageNavi);
+		
+		List<ContactDTO> count10 = aservice.count10(cpage, codeGroup, contactDTO); //게시글 10개씩 노출
+		model.addAttribute("count10", count10); //allBoardCount
+		model.addAttribute("codeGroup",codeGroup); //cdto
 
 		//진행단계 조회
 		codeGroup.setCmns_cd_group_id("CODE_STEP"); //공동코드

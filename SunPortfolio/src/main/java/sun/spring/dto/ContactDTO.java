@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ContactDTO {
 	private int seq;
-	private int rownum;
+	private int row_num;
 	//private int rnum;
 	private String category;
 	private String title;
@@ -17,6 +17,8 @@ public class ContactDTO {
 	private String tel;
 	private String content;
 	private Timestamp con_date; //데이터베이스에서 가지고 온  저장시간
+	private String startDate;
+	private String endDate;
 	private String dateWrite; //저장시간 변경한 시간
 	private String boardck;
 	private MultipartFile file;
@@ -46,12 +48,12 @@ public class ContactDTO {
 		this.seq = seq;
 	}
 
-	public int getRownum() {
-		return rownum;
+	public int getRow_num() {
+		return row_num;
 	}
 
-	public void setRownum(int rownum) {
-		this.rownum = rownum;
+	public void setRow_num(int row_num) {
+		this.row_num = row_num;
 	}
 
 	public String getCategory() {
@@ -116,6 +118,22 @@ public class ContactDTO {
 
 	public void setCon_date(Timestamp con_date) {
 		this.con_date = con_date;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getDateWrite() {

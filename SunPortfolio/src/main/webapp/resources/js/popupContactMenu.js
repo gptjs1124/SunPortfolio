@@ -49,7 +49,7 @@ $(document).ready(function() {
 			type : "post",
 			url : "/admin/codeGroupSelect",
 			data : {
-				cmns_cd_group_id : "CODE_CM" // 다음에 빼기
+				cmns_cd_group_id : "CODE_CM"
 			}
 	}).done(function(resp){
 		for(let i = 0; i < resp.length; i++){

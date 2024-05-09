@@ -7,42 +7,31 @@
 <article id="Aboutus" class="sub_cont">
 	<div class="inner1400">
 		<div class="admin_tit_s1">
-			<form>
-				<div id="serch_title">검색</div>
+			<div id="serch_title">검색</div>
+			<form action="/admin/ContactListProc" method="post">
+				<input type="hidden" id="cpage" name="cpage" value ="1">
+				<input type="hidden" id="cmns_cd_nm" name="cmns_cd_nm" value ="${param.cmns_cd_nm}">
+
 				<table id="search">
 					<tr>
 						<th>제목</th>
-						<td><input type="text" id="title"></td>
+						<td><input type="text" id="title" name="title"></td>
 						<th>내용</th>
-						<td><input type="text" id="content"></td>
+						<td><input type="text" id="content" name="content"></td>
 					</tr>
 					<tr>
 						<th>날짜</th>
 						<td>
-							<input type="text" id="datepicker1">
-							<input type="text" id="datepicker2">
+							<input type="text" id="startDate" name="startDate">
+							 ~
+							<input type="text" id="endDate" name="endDate">
 						</td>
-						<th>진행단계</th>
-						<td>
-							<ul>
-								<select class="StepIng" name="StepIng">
-									<c:forEach var ="step" items="${stepCommenCode}">
-										<li>
-											<option value="${step.cmns_cd_nm}" <c:if test="${no.contact eq step.cmns_cd_nm}">selected</c:if>>${step.cmns_cd_nm}</option>
-										</li>
-									</c:forEach>
-									<%--<option value="접수" <c:if test="${no.contact eq '접수'}">selected</c:if>>접수</option>
-									<option value="진행" <c:if test="${no.contact eq '진행'}">selected</c:if>>진행</option>
-									<option value="완료" <c:if test="${no.contact eq '완료'}">selected</c:if>>완료</option>
-									<option value="대기" <c:if test="${no.contact eq '대기'}">selected</c:if>>대기</option>
-									<option value="삭제" <c:if test="${no.contact eq '삭제'}">selected</c:if>>삭제</option>--%>
-								</select>
-							</ul>
-						</td>
+						<th>회사명</th>
+						<td><input type="text" id="company" name="company"></td>
 					</tr>
 					<tr>
-						<td colspan="4" style="border-bottom: none; text-align: right; padding-top:8px;">
-							<button>검색</button>
+						<td colspan="4" style="border-bottom: none; text-align: center; padding-top:8px;">
+							<button id="contact_Search">검색</button>
 						</td>
 					</tr>
 				</table>
@@ -89,29 +78,29 @@
 						</tr>
 						
 						<c:choose>
-							<c:when test="${empty allBoardCount}">
+							<c:when test="${empty count10}">
 								<tr><td colspan="6">등록된 게시글이 없습니다.</td></tr>
 							</c:when>
 							<c:otherwise>
-								<c:forEach var="no" items="${allBoardCount}" varStatus="num">
-									<c:if test="${num.count >= 1}">
+								<c:forEach var="selectList" items="${count10}" varStatus="num">
+									<c:if test="${num.count > 0}">
 										<tr>
 											<td>
 												<input type="checkbox" name="ck" class="ck">
-												<input type="hidden" name="allBoardCount" id="allBoardCount" value="${num.count}" >
+												<input type="hidden" name="count10" id="count10" value="${num.count}" >
 											</td>
-											<td>${no.rownum}</td>
+											<td>${selectList.row_num}</td>
 											<td>
-												<a href="/admin/viewProc?seq=${no.seq}">${no.title}</a>
+												<a href="/admin/viewProc?seq=${selectList.seq}">${selectList.title}</a>
 											</td>
-											<td><span class="target">${no.content}</span></td>
-											<td>${no.dateWrite}</td>
+											<td><span class="target">${selectList.content}</span></td>
+											<td>${selectList.dateWrite}</td>
 											<td>
-												<input type="hidden" name="seq" id="seq_${no.seq}" value="${no.seq}" >
-												<input type="hidden" name="contactstepseq" id="contactstepseq_${no.contactstepseq}" value="${no.contactstepseq}" >
+												<input type="hidden" name="seq" id="seq_${selectList.seq}" value="${selectList.seq}" >
+												<input type="hidden" name="contactstepseq" id="contactstepseq_${selectList.contactstepseq}" value="${selectList.contactstepseq}" >
 												<select class="StepIng" name="StepIng">
 													<c:forEach var ="step" items="${stepCommenCode}">
-														<option value="${step.cmns_cd}" <c:if test="${step.cmns_cd_nm eq no.cmns_cd_nm}">selected</c:if>>${step.cmns_cd_nm}</option>
+														<option value="${step.cmns_cd}" <c:if test="${step.cmns_cd_nm eq selectList.cmns_cd_nm}">selected</c:if>>${step.cmns_cd_nm}</option>
 													</c:forEach>
 												</select>
 											</td>
@@ -126,9 +115,7 @@
 					<div class="page">
 						<ul>
 							<li>
-								<c:if test ="${not empty allBoardCount}">
-									${allBoardCount.get(0).getSb()}
-								</c:if>
+								${pageNavi}
 							<li>
 						</ul>
 					</div>

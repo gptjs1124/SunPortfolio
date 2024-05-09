@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import sun.spring.dto.CodeGroup;
 import sun.spring.dto.ContactDTO;
 import sun.spring.dto.FileDTO;
 
@@ -69,6 +70,10 @@ public class ContactDAO {
 	
 	public int conFileInsert(FileDTO fDTO) throws Exception{
 		return mybatis.insert("contact.insert_File", fDTO);
+	}
+
+	public int stepInsert(CodeGroup codegroup) throws Exception {
+		return mybatis.insert("contact.stepInsert", codegroup);
 	}
 	
 }

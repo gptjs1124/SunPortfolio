@@ -2,11 +2,14 @@ package sun.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
+import sun.spring.controller.Configuration;
 import sun.spring.dao.AdminDAO;
 import sun.spring.dto.*;
 
@@ -19,56 +22,100 @@ public class AdminService {
 	
 	/*게시판 네비게이션*/
 	/* 총 게시물 갯수 */
-	public List<ContactDTO> allBoardCount() throws Exception{
-		int listCnt = adao.allBoardCount();
-		return adao.conselect();
+	public int boardCount(CodeGroup codeGroup) throws Exception{
+		return adao.allBoardCount(codeGroup);
 	}
-	
-	/* 게시물 10개씩 출력 */
-	public List<ContactDTO> count10(int cpage, CodeGroup codeGroup) throws Exception{
-		int innerBoradCount = 10; // 한 페이징 안에 들어가는 게시글 갯수
-		int start = 0; //시작 값
-		int end = 0;//마지막 값
-		String cmnsCdNm = codeGroup.getCmns_cd_nm();
-		
-		//총 게시물 갯수
-		int allCount = adao.allBoardCount();
+
+	/* List & Navi bar */
+	public String getPageNavi(int cpage, CodeGroup codeGroup) throws Exception{
+		int pageTotalCount = 0; // 네비게이션 페이지 갯수
+
+		//전체 count
+		int allCount = boardCount(codeGroup);
+
+		//페이지 갯수 계산하기
+		if(allCount % Configuration.RECORD_COUNT_PER_PAGE > 0){
+			pageTotalCount = allCount / Configuration.RECORD_COUNT_PER_PAGE + 1;
+		}else{
+			pageTotalCount = allCount / Configuration.RECORD_COUNT_PER_PAGE;
+		}
 
 		//페이지 별 게시글 start와 end값 지정
-		if(cpage == 1) {
-			start = cpage;
-			end = cpage * innerBoradCount;
-		}else {
-			start = (cpage-1) * innerBoradCount + 1;  //2페이지 11페이지
-			end = start + (innerBoradCount-1); //11+10 = 21
+		if(cpage < 1) { // cpage가 0 이하일 경우 해커를 방지
+			cpage = 1;
+		}else if(cpage > allCount){
+			cpage = pageTotalCount;
 		}
-		
-		//하단 네비게이션이 디비 데이터가 몇개 들어가 있는지.
-		int totalpage = allCount / innerBoradCount;
-		totalpage = (allCount % innerBoradCount) > 0 ? totalpage+1 : totalpage;
 		
 		//하단 네비게이션 < > 기준점
-		int startNav = (cpage-1) / innerBoradCount * innerBoradCount + 1;
-		int endNav = 0;
-		//TODO:: 페이징 고장남 .. 확인 부탁
-		endNav = startNav + innerBoradCount - 1; // 이게 원본
+		int startNav = (cpage - 1) / Configuration.NAVI_COUNT_PER_PAGE * Configuration.NAVI_COUNT_PER_PAGE + 1; // <
+		int endNav = startNav + Configuration.NAVI_COUNT_PER_PAGE - 1; // >
+		if(endNav > pageTotalCount) {endNav = pageTotalCount;} //마지막 페이지 설정
+
+		boolean needPrev = true;
+		boolean needNext = true;
+
+		if(startNav == 1) {needPrev = false;}
+		if(endNav == pageTotalCount) {needNext = false;}
 		
 		//페이지 네비게이션
-		StringBuilder sd = new StringBuilder();
-		if(startNav >= innerBoradCount) {
-			sd.append("<a href = '/sub/contact/adminContactListProc?cpage="+(startNav-1)+"'> < </a>");
-		}
-		for (int i = startNav; i <= endNav; i++) {
-			sd.append("<a href = '/sub/contact/adminContactListProc?cpage="+i+"'>"+i+"</a>");
-			if(endNav > totalpage) {
-				break;
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("<ul>");
+
+		String needPrevLink = "";
+		String needNextLink = "";
+		String link_On = "";
+		String link = "";
+		if(codeGroup.getCmns_cd_nm() == null){
+			needPrevLink = "<li><a href ='/admin/ContactListProc?cpage="+(startNav-1)+"'> < </a></li>";
+			needNextLink = "<li><a href = '/admin/ContactListProc?cpage="+(endNav+1)+"'> > </a></li>";
+
+			for (int i = startNav; i <= endNav; i++) {
+				if(cpage == i) {
+					link_On = "<li class='on'><a href='/admin/ContactListProc?cpage="+i+"'>"+i+"</a></li>";
+				}else{
+					link = "<li><a href='/admin/ContactListProc?cpage="+i+"'>"+i+"</a></li>";
+				}
+			}
+		}else{
+			needPrevLink = "<li><a href ='/admin/ContactListProc?cpage="+(startNav-1)+"&cmns_cd_nm="+codeGroup.getCmns_cd_nm()+"'> < </a></li>";
+			needNextLink = "<li><a href = '/admin/ContactListProc?cpage="+(endNav+1)+"&cmns_cd_nm="+codeGroup.getCmns_cd_nm()+"'> > </a></li>";
+
+			for (int i = startNav; i <= endNav; i++) {
+				if(cpage == i) {
+					link_On = "<li class='on'><a href='/admin/ContactListProc?cpage="+i+"&cmns_cd_nm="+codeGroup.getCmns_cd_nm()+"'>"+i+"</a></li>";
+				}else{
+					link = "<li><a href='/admin/ContactListProc?cpage="+i+"&cmns_cd_nm="+codeGroup.getCmns_cd_nm()+"'>"+i+"</a></li>";
+				}
 			}
 		}
-		if(endNav <= totalpage) {
-			sd.append("<a href = '/sub/contact/adminContactListProc?cpage="+(endNav+1)+"'> > </a>");
+
+		if(needPrev) {
+			sb.append(needPrevLink);
 		}
+		for (int i = startNav; i <= endNav; i++) {
+			if(cpage == i) {
+				sb.append(link_On);
+			}else{
+				sb.append(link);
+			}
+		}
+		if(needNext) {
+			sb.append(needNextLink);
+		}
+		sb.append("</ul>");
 		
-		return adao.boardCount10(start, end, sd, cmnsCdNm);
+		return sb.toString();
+	}
+
+	/* 게시물 10개씩 출력 */
+	public List<ContactDTO> count10(int cpage, CodeGroup codeGroup, ContactDTO contactDTO) throws Exception{
+		int start = cpage * Configuration.RECORD_COUNT_PER_PAGE - (Configuration.RECORD_COUNT_PER_PAGE - 1); //시작 값
+		int end = start + (Configuration.RECORD_COUNT_PER_PAGE - 1); //마지막 값
+		String cmnsCdNm = codeGroup.getCmns_cd_nm();
+
+		return adao.count10(start, end, cmnsCdNm, contactDTO);
 	}
 	
 	/**/
