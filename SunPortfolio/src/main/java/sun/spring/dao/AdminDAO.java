@@ -16,9 +16,11 @@ public class AdminDAO {
 	private SqlSessionTemplate mybatis;
 	
 	/* 총 게시글 카운트 */
-	public int allBoardCount(CodeGroup codeGroup) throws Exception{
-		return mybatis.selectOne("admin.allBoardCount", codeGroup);
-		//TODO :: 게시판 Count 세는 것부터 조건문 수정해야하는데, 아래  count10에서 보면  ContactDTO contactDTO 이파라마터 계속 들고 다니잖아 이것도 연결 해야함
+	public int allBoardCount(CodeGroup codeGroup, ContactDTO contactDTO) throws Exception{
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("codeGroup", codeGroup);
+		map.put("contactDTO", contactDTO);
+		return mybatis.selectOne("admin.allBoardCount", map);
 	}
 
 	/* 게시물 10개씩 출력 */

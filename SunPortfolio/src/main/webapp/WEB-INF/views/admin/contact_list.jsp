@@ -51,14 +51,37 @@
 
 				<dd>
 					<ul>
-						<li>
-							<a href="/admin/ContactListProc?cpage=1">전체</a>
-						</li>
+						<c:choose>
+							<c:when test = "${empty param.cmns_cd_nm}">
+								<li>
+									<a href="/admin/ContactListProc?cpage=1" class="tabMenu_on">전체</a>
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li>
+									<a href="/admin/ContactListProc?cpage=1">전체</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
 						<!-- 탭메뉴생성 -->
 						<c:forEach var ="step" items="${stepCommenCode}">
-							<li>
-								<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=${step.cmns_cd_nm}">${step.cmns_cd_nm}</a>
-							</li>
+							<c:choose>
+								<c:when test = "${step.cmns_cd_nm == param.cmns_cd_nm}">
+									<li>
+										<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=${step.cmns_cd_nm}" class="tabMenu_on">${step.cmns_cd_nm}</a>
+									</li>
+								</c:when>
+								<c:when test = "${step.cmns_cd_nm == param.cmns_cd_nm}">
+									<li>
+										<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=${step.cmns_cd_nm}" class="tabMenu_on">${step.cmns_cd_nm}</a>
+									</li>
+								</c:when>
+								<c:otherwise>
+									<li>
+										<a href="/admin/ContactListProc?cpage=1&cmns_cd_nm=${step.cmns_cd_nm}">${step.cmns_cd_nm}</a>
+									</li>
+								</c:otherwise>
+							</c:choose>
 						</c:forEach>
 					</ul>
 				</dd>
@@ -73,13 +96,14 @@
 							<th>번호</th>
 							<th>제목</th>
 							<th>내용</th>
+							<th>회사명</th>
 							<th>날짜</th>
 							<th>진행단계</th>
 						</tr>
 						
 						<c:choose>
 							<c:when test="${empty count10}">
-								<tr><td colspan="6">등록된 게시글이 없습니다.</td></tr>
+								<tr><td colspan="7" style="text-align:center;">등록된 게시글이 없습니다.</td></tr>
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="selectList" items="${count10}" varStatus="num">
@@ -94,6 +118,9 @@
 												<a href="/admin/viewProc?seq=${selectList.seq}">${selectList.title}</a>
 											</td>
 											<td><span class="target">${selectList.content}</span></td>
+											<td>
+													${selectList.company}
+											</td>
 											<td>${selectList.dateWrite}</td>
 											<td>
 												<input type="hidden" name="seq" id="seq_${selectList.seq}" value="${selectList.seq}" >

@@ -83,7 +83,7 @@ public class AdminController {
 	/* 접수 :::::::::::::::::::::::::::::::::::::::::::::::::::: */
 	@RequestMapping("ContactListProc")
 	public String listProc(Model model, int cpage, CodeGroup codeGroup, ContactDTO contactDTO) throws Exception{
-		String pageNavi = aservice.getPageNavi(cpage, codeGroup); //page 네비게이션
+		String pageNavi = aservice.getPageNavi(cpage, codeGroup, contactDTO); //page 네비게이션
 		model.addAttribute("pageNavi", pageNavi);
 		
 		List<ContactDTO> count10 = aservice.count10(cpage, codeGroup, contactDTO); //게시글 10개씩 노출

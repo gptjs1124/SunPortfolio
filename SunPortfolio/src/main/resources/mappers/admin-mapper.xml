@@ -66,33 +66,68 @@
 		FROM sunportfolio t1
 		INNER JOIN contactStep t2
 		ON	t1.SEQ = t2.SEQ
-		<if test="cmns_cd_nm != null">
-			WHERE
-			(
-			SELECT
-				cmns_cd
-			FROM
-				common_code
-			WHERE
-				cmns_cd_nm = #{cmns_cd_nm}) = t2.CMNS_CD
-		</if>
-		WHERE
-		<!--<trim prefixOverrides="AND">
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="contactDTO.cmns_cd_nm != null and !contactDTO.cmns_cd_nm.equals('')">
+				AND (
+				SELECT
+					cmns_cd
+				FROM
+					common_code
+				WHERE
+					cmns_cd_nm = #{codeGroup.cmns_cd_nm}) = t2.CMNS_CD
+			</if>
 			<if test="contactDTO.title != null and !contactDTO.title.equals('')">
-				t1.TITLE LIKE '%'||#{contactDTO.title}||'%' AND
+				AND t1.TITLE LIKE '%'||#{contactDTO.title}||'%'
 			</if>
 			<if test="contactDTO.startDate != null and !contactDTO.startDate.equals('') or contactDTO.endDate != null and !contactDTO.endDate.equals('')">
-				t1.con_date BETWEEN #{contactDTO.startDate} AND #{contactDTO.endDate} AND
+				AND t1.con_date BETWEEN To_TIMESTAMP(#{contactDTO.startDate}, 'YYYY-MM-DD HH24:mi:ss') AND To_TIMESTAMP(#{contactDTO.endDate}, 'YYYY-MM-DD HH24:mi:ss')
 			</if>
 			<if test="contactDTO.content != null and !contactDTO.content.equals('')">
-				t1.CONTENT LIKE '%'||#{contactDTO.content}||'%' AND
+				AND t1.CONTENT LIKE '%'||#{contactDTO.content}||'%'
 			</if>
 			<if test="contactDTO.company != null and !contactDTO.company.equals('')">
-				t1.COMPANY LIKE '%'||#{contactDTO.company}||'%'
+				AND t1.COMPANY LIKE '%'||#{contactDTO.company}||'%'
 			</if>
-		</trim>-->
+		</trim>
 		)
 	</select>
+
+	<!--<select id="allBoardCount" resultType="int">
+		&lt;!&ndash; 게시물 총 갯수 &ndash;&gt;
+		select
+		count(*)
+		FROM
+		(
+		SELECT
+		*
+		FROM sunportfolio t1
+		INNER JOIN contactStep t2
+		ON	t1.SEQ = t2.SEQ
+		WHERE
+		1=1
+		<if test="contactDTO.cmns_cd_nm != null and !contactDTO.cmns_cd_nm.equals('')">
+			AND (
+			SELECT
+			cmns_cd
+			FROM
+			common_code
+			WHERE
+			cmns_cd_nm = #{codeGroup.cmns_cd_nm}) = t2.CMNS_CD
+		</if>
+		<if test="contactDTO.title != null and !contactDTO.title.equals('')">
+			AND t1.TITLE LIKE '%'||#{contactDTO.title}||'%'
+		</if>
+		<if test="contactDTO.startDate != null and !contactDTO.startDate.equals('') or contactDTO.endDate != null and !contactDTO.endDate.equals('')">
+			AND t1.con_date BETWEEN #{contactDTO.startDate} AND #{contactDTO.endDate}
+		</if>
+		<if test="contactDTO.content != null and !contactDTO.content.equals('')">
+			AND t1.CONTENT LIKE '%'||#{contactDTO.content}||'%'
+		</if>
+		<if test="contactDTO.company != null and !contactDTO.company.equals('')">
+			AND t1.COMPANY LIKE '%'||#{contactDTO.company}||'%'
+		</if>
+		)
+	</select>-->
 
 	<select id="boardCount10" parameterType="hashMap" resultType="sun.spring.dto.ContactDTO">
 		select
@@ -125,33 +160,31 @@
 		FROM sunportfolio t1
 			INNER JOIN contactStep t2
 		    	ON	t1.SEQ = t2.SEQ
-		<if test="cmns_cd_nm != null">
-		WHERE
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="cmns_cd_nm != null and !cmns_cd_nm.equals('')">
 			(
 			SELECT
 				cmns_cd
 			FROM
 				common_code
-			WHERE
-				cmns_cd_nm = #{cmns_cd_nm}) = t2.CMNS_CD
-		</if>
-		ORDER BY t1.seq DESC) t1
-		WHERE
-		<trim prefixOverrides="AND">
+				WHERE cmns_cd_nm = #{cmns_cd_nm}) = t2.CMNS_CD
+			</if>
 			<if test="contactDTO.title != null and !contactDTO.title.equals('')">
-				t1.TITLE LIKE '%'||#{contactDTO.title}||'%' AND
+				AND t1.TITLE LIKE '%'||#{contactDTO.title}||'%'
 			</if>
 			<if test="contactDTO.startDate != null and !contactDTO.startDate.equals('') or contactDTO.endDate != null and !contactDTO.endDate.equals('')">
-				 t1.con_date BETWEEN #{contactDTO.startDate} AND #{contactDTO.endDate} AND
+				AND t1.con_date BETWEEN To_TIMESTAMP(#{contactDTO.startDate}, 'YYYY-MM-DD HH24:mi:ss') AND To_TIMESTAMP(#{contactDTO.endDate}, 'YYYY-MM-DD HH24:mi:ss')
 			</if>
 			<if test="contactDTO.content != null and !contactDTO.content.equals('')">
-				t1.CONTENT LIKE '%'||#{contactDTO.content}||'%' AND
+				AND t1.CONTENT LIKE '%'||#{contactDTO.content}||'%'
 			</if>
 			<if test="contactDTO.company != null and !contactDTO.company.equals('')">
-				t1.COMPANY LIKE '%'||#{contactDTO.company}||'%' AND
+				AND t1.COMPANY LIKE '%'||#{contactDTO.company}||'%'
 			</if>
 		</trim>
-		t1.ROW_NUM BETWEEN ${start} AND ${end}
+		ORDER BY t1.seq DESC) t1
+		WHERE
+			t1.ROW_NUM BETWEEN ${start} AND ${end}
 	</select>
 
 	<!-- 공통코드 불러오기 :: 카테고리 메뉴 -->

@@ -22,16 +22,16 @@ public class AdminService {
 	
 	/*게시판 네비게이션*/
 	/* 총 게시물 갯수 */
-	public int boardCount(CodeGroup codeGroup) throws Exception{
-		return adao.allBoardCount(codeGroup);
+	public int boardCount(CodeGroup codeGroup, ContactDTO contactDTO) throws Exception{
+		return adao.allBoardCount(codeGroup, contactDTO);
 	}
 
 	/* List & Navi bar */
-	public String getPageNavi(int cpage, CodeGroup codeGroup) throws Exception{
+	public String getPageNavi(int cpage, CodeGroup codeGroup, ContactDTO contactDTO) throws Exception{
 		int pageTotalCount = 0; // 네비게이션 페이지 갯수
 
 		//전체 count
-		int allCount = boardCount(codeGroup);
+		int allCount = boardCount(codeGroup, contactDTO);
 
 		//페이지 갯수 계산하기
 		if(allCount % Configuration.RECORD_COUNT_PER_PAGE > 0){
