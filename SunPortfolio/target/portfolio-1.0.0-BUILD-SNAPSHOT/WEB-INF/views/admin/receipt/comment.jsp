@@ -26,18 +26,18 @@
 				<c:forEach var="commentVO" items="${requestScope.commentList}" varStatus="num">
 					<c:if test="${num.count >= 1}">
 						<li class="commentLi">
+							<input type="hidden" id="comment_seq" value ="${commentVO.comment_seq}">
 							<input type="hidden" id="seq" value ="${commentVO.seq}">
-							<input type="hidden" id="sunportfolioSeq" value ="${commentVO.sunportfolioSeq}">
 							<ul>
 								<li>
 									<span class="clicle"></span>
 								</li>
 								
-								<li>${commentVO.name} <span class="date">${commentVO.commentDate}</span></li>
+								<li>${commentVO.user_idntf_id} <span class="date">${commentVO.comment_date}</span></li>
 								<li class="comment">
-									<span class="commentText">${commentVO.commentText}</span>
+									<span class="commentText">${commentVO.comment_text}</span>
 									<div class="commentTextModify">
-										<input type="text" id="commentTextModify" value="${commentVO.commentText}">
+										<input type="text" id="commentTextModify" value="${commentVO.comment_text}">
 									</div>
 									
 									<div class="commenBtn">
@@ -59,7 +59,7 @@
 				</ul>
 				
 				<div id="commentSave">
-					<input type="hidden" id="sunportfolioSeq" value="${con.seq}">
+					<input type="hidden" id="sunportfolioSeq_comment" value="${con.seq}">
 					<input type="hidden" id="name" value="${con.name}">
 					<textarea type="text" id="commentText"></textarea>
 					<button id="commentSaveBtn">저장</button>

@@ -114,7 +114,7 @@ public class AdminController {
 		con = aservice.conView(con);
 
 		CommentDTO commentDTO = new CommentDTO();
-		commentDTO.setSunportfolioSeq(Integer.parseInt(seq));
+		commentDTO.setSeq(Integer.parseInt(seq));
 		List<CommentDTO> commentList = aservice.commentSelect(commentDTO);
 
 		model.addAttribute("con", con);
@@ -183,20 +183,21 @@ public class AdminController {
 	public String commentInsert(HttpServletRequest request, Model model) throws Exception{
 		
 		CommentDTO commentDTO = new CommentDTO();
-		String sunportfolioSeq = request.getParameter("sunportfolioSeq");
-		commentDTO.setSunportfolioSeq(Integer.parseInt(sunportfolioSeq));
+		String seq = request.getParameter("seq");
+		commentDTO.setSeq(Integer.parseInt(seq));
 		int reuslt = 0;
-		try {		
+		try {	
+			//TODO:: 맴버 개발 다 되면 comment 테이블 맞추기
 			// 관리자로 로그인 되어 있는지 확인하기
 			AdminDTO adminLogin = (AdminDTO)session.getAttribute("adminLogin");
 			if(adminLogin.getId().equals("admin")) {
-				commentDTO.setName(adminLogin.getId());
+				commentDTO.setUser_idntf_id(adminLogin.getId());
 			}else {
-				commentDTO.setName(request.getParameter("name"));
+				commentDTO.setUser_idntf_id(request.getParameter("user_idntf_id"));
 			}
-			commentDTO.setCommentText(request.getParameter("commentText"));
+			commentDTO.setComment_text(request.getParameter("comment_text"));
 			
-			reuslt = aservice.commentInsert(commentDTO);					
+			reuslt = aservice.commentInsert(commentDTO);
 		
 		}catch(Exception ex) {
 			System.out.println(ex.getMessage());
@@ -209,8 +210,8 @@ public class AdminController {
 	@RequestMapping(value="commentDelete", produces="text/plain; charset=UTF-8")
 	public String commentDelete(HttpServletRequest request, Model model) throws Exception{
 		CommentDTO commentDTO = new CommentDTO();
+		commentDTO.setComment_seq(Integer.parseInt(request.getParameter("comment_seq")));
 		commentDTO.setSeq(Integer.parseInt(request.getParameter("seq")));
-		commentDTO.setSunportfolioSeq(Integer.parseInt(request.getParameter("sunportfolioSeq")));
 		int result = aservice.commentDelete(commentDTO);
 		
 		String message = "";
@@ -227,9 +228,9 @@ public class AdminController {
 	@RequestMapping(value="commentUpdate", produces="text/plain; charset=UTF-8")
 	public String commentUpdate(HttpServletRequest request, Model model) throws Exception{
 		CommentDTO commentDTO = new CommentDTO();
+		commentDTO.setComment_seq(Integer.parseInt(request.getParameter("comment_seq")));
 		commentDTO.setSeq(Integer.parseInt(request.getParameter("seq")));
-		commentDTO.setSunportfolioSeq(Integer.parseInt(request.getParameter("sunportfolioSeq")));
-		commentDTO.setCommentText(request.getParameter("commentText"));
+		commentDTO.setComment_text(request.getParameter("comment_text"));
 		int result = aservice.commentUpdate(commentDTO);
 		
 		String message = "";

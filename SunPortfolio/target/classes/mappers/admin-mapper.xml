@@ -39,20 +39,43 @@
 
 	<!-- comment -->
 	<insert id="commentInsert">
-		insert into sun_comment values (sun_commentSeq.nextval, #{sunportfolioSeq}, #{name}, #{commentText}, sysdate)
+		INSERT
+		INTO
+			KH.SUN_COMMENT
+		(
+		 SEQ,
+		 USER_IDNTF_ID,
+		 COMMENT_SEQ,
+		 COMMENT_TEXT,
+		 COMMENT_DATE,
+		 FRST_REG_DT,
+		 FRST_RGTR_ID,
+		 LAST_MDFCN_DT,
+		 LAST_MDFR_ID
+		)VALUES(
+		   #{seq},
+		   #{user_idntf_id},
+		   sun_commentSeq.nextval,
+		   #{comment_text},
+		   sysdate,
+		   sysdate,
+		   #{user_idntf_id},
+		   sysdate,
+		   #{user_idntf_id}
+	   )
 	</insert>
 
 	<!-- comment 조회 -->
 	<select id="commentSelect" resultType="sun.spring.dto.CommentDTO">
-		select * from sun_comment where sunportfolioSeq = ${sunportfolioSeq}
+		select * from sun_comment where SEQ = ${seq}
 	</select>
 
 	<delete id="commentDelete">
-		delete from sun_comment where seq = ${seq} and sunportfolioSeq = ${sunportfolioSeq}
+		delete from sun_comment where COMMENT_SEQ = ${comment_seq} and SEQ = ${seq}
 	</delete>
 	
 	<update id="commentUpdate">
-		update sun_comment set commentText = #{commentText} where seq = ${seq} and sunportfolioSeq = ${sunportfolioSeq}
+		update sun_comment set COMMENT_TEXT = #{comment_text} where COMMENT_SEQ = ${comment_seq} and SEQ = ${seq}
 	</update>
 
 	<select id="allBoardCount" resultType="int">

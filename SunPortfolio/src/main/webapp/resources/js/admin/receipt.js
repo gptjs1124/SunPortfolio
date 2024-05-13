@@ -61,9 +61,9 @@ $(document).ready(function(){
 			type : "post",
 			url : "/admin/commentInsert",
 			data : {
-				sunportfolioSeq : $('#sunportfolioSeq').val(),
-				name : $('#name').val(),
-				commentText : $('#commentText').val()				
+				seq : $('#sunportfolioSeq_comment').val(),
+				user_idntf_id : $('#name').val(),
+				comment_text : $('#commentText').val()
 			}
 		}).done(function(resp){
 			if(resp>0){
@@ -106,13 +106,13 @@ $(document).ready(function(){
 			type : "post",
 			url : "/admin/commentDelete",
 			data : {
-				seq : $(this).closest(".commentLi").find("#seq").val(),
-				sunportfolioSeq : $(this).closest(".commentLi").find("#sunportfolioSeq").val()
+				comment_seq : $(this).closest(".commentLi").find("#comment_seq").val(),
+				seq : $(this).closest(".commentLi").find("#seq").val()
 			}
 		}).done(function(resp){
 			alert(resp);
 			location.reload();
-		}).fail(function(erro1,erro2){
+		}).fail(function(erro1, erro2){
 			alert(erro1);
 		});
 	});
@@ -123,9 +123,9 @@ $(document).ready(function(){
 			type : "post",
 			url : "/admin/commentUpdate",
 			data : {
+				comment_seq : $(this).closest(".commentLi").find("#comment_seq").val(),
 				seq : $(this).closest(".commentLi").find("#seq").val(),
-				sunportfolioSeq : $(this).closest(".commentLi").find("#sunportfolioSeq").val(),
-				commentText : $(this).closest(".commentLi").find("#commentTextModify").val()
+				comment_text : $(this).closest(".commentLi").find("#commentTextModify").val()
 			}
 		}).done(function(resp){
 			alert(resp);

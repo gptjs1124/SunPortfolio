@@ -15,21 +15,21 @@
 			<dl>
 				<dt>Contact</dt>
 				<dd>
-					<span>히힛히힛히힛히힛히힛히힛히힛히힛히힛히힛히힛히힛히힛</span>
-					<p>고객의 특징을 생각하여 디자인을 하는 디자이너 김혜선입니다. 레이아웃 / 구성 / 사진 / 타이포 등 고객이
+					<span>고객의 성공을 위해 차별적인 서비스와 지원을 제공합니다.</span>
+					<p>고객의 특징을 생각하여 디자인을 하는 디자이너를 매칭해드립니다. 레이아웃 / 구성 / 사진 / 타이포 등 고객이
 						원하는 최상의 디자인을 만들어 드립니다.</p>
 				</dd>
 			</dl>
 		</div>
 
 		<div class="contact">
-			<div class="tit_au_c">Self-introduction</div>
+			<div class="tit_au_c">CONTACT</div>
 			<form action="writeProc" method="post" id="contactProc" enctype="multipart/form-data">
 				<input type="hidden" name="boardck" id="boardck" style="width:100%;" value="Y">
 				<div class="ab_con">
 					<table>
 						<tr>
-							<th colspan="1">카테고리</th>
+							<th colspan="1">카테고리 *</th>
 							<td colspan="3">
 								<input type="hidden" id="categoryArr" name="categoryArr">
 								<div id="category_area"></div>
@@ -37,27 +37,27 @@
 							</td>
 						</tr>
 						<tr>
-							<th colspan="1">제목</th>
+							<th colspan="1">제목 *</th>
 						<td colspan="3">
 								<input type="text" name="title" id="title" style="width:100%;">
 							</td>
 						</tr>
 						<tr>
-							<th>회사</th>
+							<th>회사 *</th>
 							<td>
 								<input type="text" name="company" id="company">
 							</td>
-							<th>직급</th>
+							<th>직급 *</th>
 							<td>
 								<input type="text" name="grade" id="grade">
 							</td>
 						</tr>
 						<tr>
-							<th>이름</th>
+							<th>이름 *</th>
 							<td>
 								<input type="text" name="name" id="name">
 							</td>
-							<th>전화번호</th>
+							<th>전화번호 *</th>
 							<td>
 								<select  id="selTel" name="selTel">
 									<option value="010">010</option>
@@ -72,7 +72,7 @@
 							</td>
 						</tr>
 						<tr>
-							<th colspan="1">상담내용</th>
+							<th colspan="1">상담내용 *</th>
 							<td colspan="3">
 								<textarea name="content" id="content" style="width: 100%; height: 200px;"></textarea>
 							</td>
