@@ -64,7 +64,7 @@ ul.tabs li.current{
 }
 
 #category_area{
-    width:90%; background: #333;  border: none;  padding: 20px;  border-radius: 5px; display: inline-block; color: #fff;  margin-bottom: 20px;
+    width:90%; background: #333;  border: none;  padding: 20px;  border-radius: 5px; display: inline-block; color: #fff;
 }
 .category_con{
     display: inline-block; background: #555;  border: none;  padding: 10px; margin:5px 5px 0 5px;  border-radius: 5px;  color: #fff;}

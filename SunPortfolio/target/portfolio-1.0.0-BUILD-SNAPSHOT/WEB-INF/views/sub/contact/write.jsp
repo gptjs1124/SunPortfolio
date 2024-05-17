@@ -38,7 +38,7 @@
 						</tr>
 						<tr>
 							<th colspan="1">제목 *</th>
-						<td colspan="3">
+							<td colspan="3">
 								<input type="text" name="title" id="title" style="width:100%;">
 							</td>
 						</tr>
@@ -84,9 +84,24 @@
 							</td>
 						</tr>
 						<tr>
-							<th colspan="1">자동등록방지</th>
+							<th colspan="1">자동등록방지 *</th>
 							<td colspan="3">
-								캡챠는 도메인연결하고 진행하기
+								<div id="captch">
+									<div style="overflow:hidden">
+										<div style="float:left">
+											<img title="캡차이미지" src="/sub/contact/captchaImg.do" alt="캡차이미지" id="captchaImg"/>
+											<div id="ccaudio" style="display:none"></div>
+										</div>
+									</div>
+									<div style="padding:3px">
+										<input id="reload" type="button" onclick="javaScript:getImage()" value="새로고침"/>
+										<input id="soundOn" type="button" onclick="javaScript:audio()" value="음성듣기"/>
+									</div>
+									<div style="padding:3px">
+										<input id="answer" type="text" value="">
+										<input id="check" type="button" value="확인"/>
+									</div>
+								</div>
 							</td>
 						</tr>
 					</table>

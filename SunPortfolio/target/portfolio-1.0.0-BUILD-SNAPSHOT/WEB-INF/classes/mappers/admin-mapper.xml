@@ -115,99 +115,67 @@
 		)
 	</select>
 
-	<!--<select id="allBoardCount" resultType="int">
-		&lt;!&ndash; 게시물 총 갯수 &ndash;&gt;
-		select
-		count(*)
-		FROM
-		(
-		SELECT
-		*
-		FROM sunportfolio t1
-		INNER JOIN contactStep t2
-		ON	t1.SEQ = t2.SEQ
-		WHERE
-		1=1
-		<if test="contactDTO.cmns_cd_nm != null and !contactDTO.cmns_cd_nm.equals('')">
-			AND (
-			SELECT
-			cmns_cd
-			FROM
-			common_code
-			WHERE
-			cmns_cd_nm = #{codeGroup.cmns_cd_nm}) = t2.CMNS_CD
-		</if>
-		<if test="contactDTO.title != null and !contactDTO.title.equals('')">
-			AND t1.TITLE LIKE '%'||#{contactDTO.title}||'%'
-		</if>
-		<if test="contactDTO.startDate != null and !contactDTO.startDate.equals('') or contactDTO.endDate != null and !contactDTO.endDate.equals('')">
-			AND t1.con_date BETWEEN #{contactDTO.startDate} AND #{contactDTO.endDate}
-		</if>
-		<if test="contactDTO.content != null and !contactDTO.content.equals('')">
-			AND t1.CONTENT LIKE '%'||#{contactDTO.content}||'%'
-		</if>
-		<if test="contactDTO.company != null and !contactDTO.company.equals('')">
-			AND t1.COMPANY LIKE '%'||#{contactDTO.company}||'%'
-		</if>
-		)
-	</select>-->
-
 	<select id="boardCount10" parameterType="hashMap" resultType="sun.spring.dto.ContactDTO">
 		select
-			t1.ROW_NUM,
-			t1.SEQ,
-			t1.TITLE,
-			t1.COMPANY,
-			t1.GRADE,
-			t1.NAME,
-			t1.TEL,
-			t1.CONTENT,
-			t1.CON_DATE,
-			t1.BOARDCK,
-			t1.FILENAME,
-			t1.FILEVOLUME,
-			t1.DELETE_YN,
-			t1.CONTACTSTEPSEQ,
-			t1.CMNS_CD_GROUP_ID,
-			t1.CMNS_CD,
-			t1.CMNS_CD_NM
+			tt2.ROW_NUM,
+			tt2.SEQ,
+			tt2.TITLE,
+			tt2.COMPANY,
+			tt2.GRADE,
+			tt2.NAME,
+			tt2.TEL,
+			tt2.CONTENT,
+			tt2.CON_DATE,
+			tt2.BOARDCK,
+			tt2.FILENAME,
+			tt2.FILEVOLUME,
+			tt2.DELETE_YN,
+			tt2.CONTACTSTEPSEQ,
+			tt2.CMNS_CD_GROUP_ID,
+			tt2.CMNS_CD,
+			tt2.CMNS_CD_NM
 		FROM
 		(
 		SELECT
-		ROWNUM AS ROW_NUM,
-		t1.*,
-		t2.CONTACTSTEPSEQ,
-		t2.CMNS_CD_GROUP_ID,
-		t2.CMNS_CD,
-		t2.CMNS_CD_NM
-		FROM sunportfolio t1
-			INNER JOIN contactStep t2
-		    	ON	t1.SEQ = t2.SEQ
-		<trim prefix="WHERE" prefixOverrides="AND">
-			<if test="cmns_cd_nm != null and !cmns_cd_nm.equals('')">
-			(
-			SELECT
-				cmns_cd
-			FROM
-				common_code
-				WHERE cmns_cd_nm = #{cmns_cd_nm}) = t2.CMNS_CD
-			</if>
-			<if test="contactDTO.title != null and !contactDTO.title.equals('')">
-				AND t1.TITLE LIKE '%'||#{contactDTO.title}||'%'
-			</if>
-			<if test="contactDTO.startDate != null and !contactDTO.startDate.equals('') or contactDTO.endDate != null and !contactDTO.endDate.equals('')">
-				AND t1.con_date BETWEEN To_TIMESTAMP(#{contactDTO.startDate}, 'YYYY-MM-DD HH24:mi:ss') AND To_TIMESTAMP(#{contactDTO.endDate}, 'YYYY-MM-DD HH24:mi:ss')
-			</if>
-			<if test="contactDTO.content != null and !contactDTO.content.equals('')">
-				AND t1.CONTENT LIKE '%'||#{contactDTO.content}||'%'
-			</if>
-			<if test="contactDTO.company != null and !contactDTO.company.equals('')">
-				AND t1.COMPANY LIKE '%'||#{contactDTO.company}||'%'
-			</if>
-		</trim>
-		ORDER BY t1.seq DESC) t1
+			ROWNUM AS ROW_NUM,
+			tt1.*
+			from(
+					SELECT
+						t1.*,
+						t2.CONTACTSTEPSEQ,
+						t2.CMNS_CD_GROUP_ID,
+						t2.CMNS_CD,
+						t2.CMNS_CD_NM
+					FROM sunportfolio t1
+						INNER JOIN contactStep t2
+							ON	t1.SEQ = t2.SEQ
+					<trim prefix="WHERE" prefixOverrides="AND">
+						<if test="cmns_cd_nm != null and !cmns_cd_nm.equals('')">
+						(
+						SELECT
+							cmns_cd
+						FROM
+							common_code
+							WHERE cmns_cd_nm = #{cmns_cd_nm}) = t2.CMNS_CD
+						</if>
+						<if test="contactDTO.title != null and !contactDTO.title.equals('')">
+							AND t1.TITLE LIKE '%'||#{contactDTO.title}||'%'
+						</if>
+						<if test="contactDTO.startDate != null and !contactDTO.startDate.equals('') or contactDTO.endDate != null and !contactDTO.endDate.equals('')">
+							AND t1.con_date BETWEEN To_TIMESTAMP(#{contactDTO.startDate}, 'YYYY-MM-DD HH24:mi:ss') AND To_TIMESTAMP(#{contactDTO.endDate}, 'YYYY-MM-DD HH24:mi:ss')
+						</if>
+						<if test="contactDTO.content != null and !contactDTO.content.equals('')">
+							AND t1.CONTENT LIKE '%'||#{contactDTO.content}||'%'
+						</if>
+						<if test="contactDTO.company != null and !contactDTO.company.equals('')">
+							AND t1.COMPANY LIKE '%'||#{contactDTO.company}||'%'
+						</if>
+					</trim>
+					ORDER BY t1.seq DESC
+				) tt1
+		)tt2
 		WHERE
-			t1.ROW_NUM BETWEEN ${start} AND ${end}
+			tt2.ROW_NUM BETWEEN ${start} AND ${end}
 	</select>
 
 	<!-- 공통코드 불러오기 :: 카테고리 메뉴 -->
