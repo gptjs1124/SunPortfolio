@@ -18,13 +18,13 @@ public class BoardCount {
 		Statement stat = con.createStatement();
 		for(int i =0;i<100;i++ ) {
 			stat.executeUpdate("insert into sunportfolio values("
-					+ "sunportfolio_seq.nextval,'홈페이지제작', '주의 은혜~ 너를 위해 천대까지"+i+"', '흘러가리', '대리', '잇샤', '031-377-6886', '위하시네에~위하시네에~위하시네에~위하시네에~위하시네에~위하시네에~',sysdate)");
+					+ "nextval('sunportfolio_seq'),'홈페이지제작', '하나하나"+i+"', '핫둘핫둘', '담당', '임하나', '031-377-6886', '꾹꾹꾸꾹꾺꾹',CURRENT_TIMESTAMP)");
 			Thread.sleep(1000);
 			System.out.println(i+"번째데이터 입력");
 		}
 		for(int i =0;i<100;i++ ) {
 			stat.executeUpdate("insert into sunportfolio values("
-					+ "sunportfolio_seq.nextval,'홈페이지제작', '주의 말씀에 순종하는자"+i+"', '복을받으리니', '대리', '잇쉬', '031-377-6886', '할렐루 할렐루야~할렐루 할렐루야~할렐루 할렐루야~할렐루 할렐루야~',sysdate)");
+					+ "nextval('sunportfolio_seq'),'홈페이지제작', '둘둘둘둘"+i+"', '두울두울두울', '담당', '스티나', '031-377-6886', '망망망망망망망망망망망망망망망망망망',CURRENT_TIMESTAMP)");
 			Thread.sleep(1000);
 			System.out.println(i+"번째데이터 입력");
 		}

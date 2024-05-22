@@ -51,7 +51,7 @@ public class ContactController {
 		try {
 			if(conDTO.getFile().getSize() > 0){
 				//첨부파일 로컬에 저장
-				String realPath = session.getServletContext().getRealPath("upload/contact/files/");
+				String realPath = "D:\\sunportfolioImg";
 				ftnDTO = fcon.fileOneInsert(conDTO, realPath);
 
 				//오라클 DB에 저장

@@ -4,7 +4,7 @@
 <mapper namespace="contact">
 	<insert id="insert" parameterType="sun.spring.dto.ContactDTO">
 		<selectKey keyProperty="seq" order="BEFORE" resultType="int">
-			SELECT sunportfolio_seq.nextval from dual
+			SELECT nextval('sunportfolio_seq') as test
 		</selectKey>
 
 		INSERT
@@ -18,11 +18,13 @@
 				TEL,
 				CONTENT,
 				CON_DATE,
-				BOARDCK,
+				BOARDCK
 			    <if test="filename!=null">
-					FILENAME,
+					,FILENAME
 			    </if>
-				FILEVOLUME
+				<if test="fileVolume!=null">
+				,FILEVOLUME
+				</if>
 			)VALUES(
 				#{seq},
 				#{title},
@@ -31,17 +33,19 @@
 				#{name},
 				#{tel},
 				#{content},
-				sysdate,
-				#{boardck},
+				CURRENT_TIMESTAMP,
+				#{boardck}
 				<if test="filename!=null">
-					#{filename},
+					,#{filename}
 				</if>
-				#{fileVolume, jdbcType = BLOB}
+				<if test="fileVolume!=null">
+					,#{fileVolume, jdbcType = BLOB}
+				</if>
 		)
 	</insert>
 	
 	<insert id ="insert_File">
-		insert into SUN_CONTACT_FILE values(SUN_CONTACT_FILE_SEQ.nextval, #{sysname}, #{oriname}, sunportfolio_seq.currval)
+		insert into SUN_CONTACT_FILE values(nextval('SUN_CONTACT_FILE_SEQ'), #{sysname}, #{oriname}, currval('sunportfolio_seq'))
 	</insert>
 	
 	<select id="select" resultType="sun.spring.dto.ContactDTO">
@@ -84,7 +88,7 @@
 	<insert id="stepInsert" parameterType="sun.spring.dto.CodeGroup">
 		INSERT
 		INTO
-			KH.CONTACTSTEP
+			CONTACTSTEP
 		(
 			CONTACTSTEPSEQ,
 			SEQ,
@@ -97,7 +101,7 @@
 			LAST_MDFR_ID,
 			UP_CMNS_CD_GROUP_ID
 		)VALUES(
-		   CONTACTSTEP_SEQ.nextval,
+		   nextval('CONTACTSTEP_SEQ'),
 		   #{seq},
 		   #{cmns_cd_group_id},
 		   #{cmns_cd},

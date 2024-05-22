@@ -6,23 +6,23 @@
 	</select>
 
 	<insert id="insertAdminIpCk">
-		insert into ipCk (seq, ip, visitDate) values(ipCkSeq.nextval, #{ip}, sysdate)
+		insert into ipCk (seq, ip, visitDate) values(nextval('ipCkSeq'), #{ip}, CURRENT_TIMESTAMP)
 	</insert>
 
 	<update id="updateAdminIpCk">
-		update ipCk set visitcnt = (visitcnt+1)	where ip=#{ip} and to_date(sysdate,'YY/MM/DD')= visitdate
+		update ipCk set visitcnt = (visitcnt+1)	where ip=#{ip} and visitdate = CURRENT_DATE
 	</update>
 
 	<select id="selectIpExistCk" resultType="int">
-		select count(*) from ipCk where ip=#{ip} and to_date(sysdate,'YY/MM/DD') = visitdate
+		select count(*) from ipCk where ip=#{ip} and visitdate = CURRENT_DATE
 	</select>
 
 	<select id="selectTodayTotalCut" resultType="int">
-		select count(*) from ipCk where to_date(sysdate,'YY/MM/DD') = visitdate
+		select count(*) from ipCk where visitdate = CURRENT_DATE
 	</select>
 
 	<select id="selectYesterDayTotalCut" resultType="Integer">
-		select * from ipCk where to_date(sysdate-1,'YY/MM/DD') = visitdate
+		select * from ipCk where visitdate = CURRENT_DATE
 	</select>
 
 	<select id="selectTotalV" resultType="int">
@@ -41,7 +41,7 @@
 	<insert id="commentInsert">
 		INSERT
 		INTO
-			KH.SUN_COMMENT
+			SUN_COMMENT
 		(
 		 SEQ,
 		 USER_IDNTF_ID,
@@ -55,12 +55,12 @@
 		)VALUES(
 		   #{seq},
 		   #{user_idntf_id},
-		   sun_commentSeq.nextval,
+		   nextval('sun_commentSeq'),
 		   #{comment_text},
-		   sysdate,
-		   sysdate,
+		   CURRENT_TIMESTAMP,
+		   CURRENT_TIMESTAMP,
 		   #{user_idntf_id},
-		   sysdate,
+		   CURRENT_TIMESTAMP,
 		   #{user_idntf_id}
 	   )
 	</insert>
@@ -137,7 +137,7 @@
 		FROM
 		(
 		SELECT
-			ROWNUM AS ROW_NUM,
+			ROW_NUMBER() OVER (ORDER BY tt1.seq DESC) AS ROW_NUM,
 			tt1.*
 			from(
 					SELECT
@@ -222,7 +222,7 @@
 	<insert id="insertChooseMenu">
 		INSERT
 		INTO
-			KH.CATEGORYMENU
+			CATEGORYMENU
 		(
 			CATEGPRYMENUSEQ,
 			SEQ,
@@ -236,7 +236,7 @@
 			UP_CMNS_CD_GROUP_ID,
 			UP_CMNS_CD
 		)VALUES(
-			  categoryMenu_seq.nextval,
+			  nextval('categoryMenu_seq'),
 			  #{seq},
 			  #{cmns_cd_group_id},
 			  #{cmns_cd},
@@ -264,11 +264,11 @@
 
 	<update id="updateStep">
 		UPDATE
-			KH.CONTACTSTEP
+			CONTACTSTEP
 		SET
 			CMNS_CD = #{cmns_cd},
 			CMNS_CD_NM = #{cmns_cd_nm},
-			LAST_MDFCN_DT = sysdate,
+			LAST_MDFCN_DT = CURRENT_TIMESTAMP,
 			LAST_MDFR_ID = #{last_mdfr_id},
 			UP_CMNS_CD_GROUP_ID = #{up_cmns_cd_group_id}
 		WHERE

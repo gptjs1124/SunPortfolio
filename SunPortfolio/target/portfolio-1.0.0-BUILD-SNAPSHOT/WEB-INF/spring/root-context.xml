@@ -5,16 +5,25 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+	<!--<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="username" value ="kh"/>
 		<property name="password" value ="kh"/>
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
 		<property name="url" value ="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="initialSize" value="30"/>
+		<property name="initialSize" value="30"/>-->
 		<!--
 		<property name="url" value ="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		 -->
+	<!--</bean>-->
+
+	<!-- JDBC-PostgreSQL -->
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.postgresql.Driver" />
+		<property name="url" value="jdbc:postgresql://localhost:5432/kh" />
+		<property name="username" value="kh" />
+		<property name="password" value="kh" />
 	</bean>
 	
 	<!-- 마이베티스와  Mysql을 연결하는 객체 -->
@@ -30,6 +39,6 @@
 	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name = "dataSource" ref="dataSource"/>
 	</bean>
-	
+
 	
 </beans>

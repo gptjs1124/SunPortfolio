@@ -77,7 +77,7 @@
 								<th colspan="1">첨부파일</th>
 								<td colspan="3">
 									<c:if test="${not empty con.filename}">
-										<img src="/upload/contact/files/${con.filename}" alt="이미지">
+										<img src="/img/${con.filename}" alt="이미지">
 										<div>
 											<button id="download_chmbu">첨부파일 다운로드</button>
 										</div>

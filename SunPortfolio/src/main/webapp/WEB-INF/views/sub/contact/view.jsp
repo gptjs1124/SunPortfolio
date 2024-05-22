@@ -67,7 +67,7 @@
 						<tr>
 							<th colspan="2">첨부파일</th>
 							<td colspan="2">
-								<img src="/upload/contact/files/${conview.filename}" alt="이미지">								
+								<img src="/img/${conview.filename}" alt="이미지">
 							</td>
 						</tr>
 					</table>
