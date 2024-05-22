@@ -18,10 +18,16 @@
 	<!--</bean>-->
 
 	<!-- JDBC-PostgreSQL -->
-
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url" value="jdbc:postgresql://localhost:5432/kh" />
+		<property name="username" value="kh" />
+		<property name="password" value="kh" />
+	</bean>-->
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="url" value="jdbc:log4jdbc:postgresql://localhost:5432/kh" />
 		<property name="username" value="kh" />
 		<property name="password" value="kh" />
 	</bean>
